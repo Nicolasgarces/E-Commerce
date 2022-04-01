@@ -21,7 +21,7 @@ console.log(store.isLogged);
 	return (
 	
 	<nav className="navbar navbar-expand-lg navbar-light bg-light text-muted bg-dark">
-	<div className="container-md">
+	<div className="container">
 				<a className="navbar-brand text-white">
 					<img
 						alt="svgImg"
@@ -29,7 +29,17 @@ console.log(store.isLogged);
 						/>
 						FIERAS
 				</a>
-		<form className="d-flex topIcons dropdown ">
+		<div className="collapse navbar-collapse d-flex justify-content-center" id="navbarNav">
+			<ul className="navbar-nav topButtons ">
+				<li className="nav-item me-5 ">
+				<a className="d-flex justify-content-center nav-link active text-white border rounded-pill navigationButtons" aria-current="page" href="#">WOMEN</a>
+				</li>
+				<li className="nav-item ms-5">
+				<a className="d-flex justify-content-center nav-link active text-white border rounded-pill navigationButtons" aria-current="page" href="#">MEN</a>
+				</li>
+			</ul>
+    	</div>
+		<form className="d-flex topIcons dropdown " onSubmit={handleSubmit} noValidate>
                     <a type="button" id="dropdownLoginUsuario" data-bs-toggle="dropdown" aria-expanded="false">
                         <i className="bi bi-person-circle  loginIcon "></i>
                     </a>
@@ -40,16 +50,30 @@ console.log(store.isLogged);
                         </div>
                         
                             <div className="form-floating form-group mt-3 ">
-                                <input type="email" className="form-control" id="floatingInput" placeholder="name@example.com" />
+                                <input 
+								type="email" 
+								className="form-control" 
+								id="floatingInput" 
+								placeholder="name@example.com"
+								onChange={(e)=>setEmail(e.target.value)}
+								value={email}
+								/>
                                 <label htmlFor="floatingInput">Email</label>
                             </div>
                             <div className="form-floating form-group mt-3">
-                                <input type="password" className="form-control" id="floatingPassword" placeholder="Password" />
+                                <input 
+								type="password" 
+								className="form-control" 
+								id="floatingPassword" 
+								placeholder="Password" 
+								onChange={(e)=>setPassword(e.target.value)}
+								value={password}
+								/>
                                 <label htmlFor="floatingPassword">Password*</label>
                             </div>
                         
                         <div className="invisible forgot-password text-right mt-2">
-                             <Link to="#">You forgot,right?!</Link>
+                             <Link to="#">You forgot,right?</Link>
                         </div> 
                         <div className="d-grid gap-2 mt-3">
                                 <button type="submit" className="btn btn-secondary">Login</button>
