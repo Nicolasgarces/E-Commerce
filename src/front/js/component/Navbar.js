@@ -49,7 +49,7 @@ console.log(store.isLogged);
                             </div>
                         
                         <div className="invisible forgot-password text-right mt-2">
-                             <Link to="#">You forgot,right?</Link>
+                             <Link to="#">You forgot,right?!</Link>
                         </div> 
                         <div className="d-grid gap-2 mt-3">
                                 <button type="submit" className="btn btn-secondary">Login</button>
