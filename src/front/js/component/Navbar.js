@@ -20,8 +20,8 @@ export const Navbar = () => {
 
   return (
     <nav class="navbar navbar-dark bg-dark">
-      <div className="row position-relative">
-        <div className="col position-absolute top-0 start-100">
+      <div className="row">
+        <div className="col-3 ">
           <Link to={`/`}>
             <a className="navbar-brand text-white">
               <img
@@ -33,7 +33,7 @@ export const Navbar = () => {
           </Link>
         </div>
 
-        <div clasNames=" col collapse navbar-collapse position-absolute bottom-50 end-100 " id="navbarNav">
+        <div clasNames=" col-3  collapse navbar-collapse " id="navbarNav">
           <ul className="navbar-nav">
             <li className="nav-item active">
               <Link to={`/`}>
@@ -62,7 +62,7 @@ export const Navbar = () => {
           </ul>
         </div>
 
-        <div className="col">
+        <div className="col-3 ">
           <form className="d-flex topIcons dropdown ">
             <a
               type="button"
@@ -114,7 +114,7 @@ export const Navbar = () => {
           </form>
         </div>
 
-        <div className="col">
+        <div className="col-3">
         <button
           className="btn btn-light"
           type="button"
@@ -126,7 +126,7 @@ export const Navbar = () => {
         </button>
 
         <div
-          className=" col offcanvas offcanvas-end"
+          className="offcanvas offcanvas-end"
           tabindex="-1"
           id="offcanvasRight"
           aria-labelledby="offcanvasRightLabel"
