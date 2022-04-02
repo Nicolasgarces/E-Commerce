@@ -79,7 +79,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 			// 		.then(data => setStore({ message: data.message }))
 			// 		.catch(error => console.log("Error loading message from backend", error));
 			// },
-			
+
+
 			getCatMen: () => {
 				fetch("https://fakestoreapi.com/products/category/men's%20clothing") //fetch para obtener la categoria men//
             	.then(res=>res.json())
