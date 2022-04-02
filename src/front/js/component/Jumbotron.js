@@ -21,8 +21,7 @@ const Jumbotron = () => {
           <Link
             type="button"
             className="buttonMen btn btn-dark position-absolute top-50 start-50 translate-middle"
-            to={`/catmen/`}
-          >
+            to={`/catmen/`}>
             SHOP MENS
           </Link>
         </div>
@@ -35,14 +34,12 @@ const Jumbotron = () => {
             <img
               src="https://www.reiss.com/nxtcms/resource/blob/4617560/a35398d954f1bfdc012fbf87094c41b4/01-02-22-ol-ww-min-2-data.jpg"
               className="card-img-top"
-              alt="..."
-            />
+              alt="..."/>
           </Link>
           <Link
             type="button"
             className="buttonWomen btn btn-dark position-absolute top-50 start-50 translate-middle"
-            to={`/catwomen/`}
-          >
+            to={`/catwomen/`}>
             SHOP WOMENS
           </Link>
         </div>
@@ -68,11 +65,8 @@ const Jumbotron = () => {
           <img
             src="https://xcdn.next.co.uk/COMMON/Items/Default/Default/ItemImages/3_4Ratio/AltItemShot/366x488/T57760s.jpg"
             className="card-img-top"
-            alt="..."
-          />
+            alt="..."/>
           </Link>
-          
-
         </div>
 
         <div className="img-4 col-3  text-center">
@@ -85,8 +79,8 @@ const Jumbotron = () => {
             alt="..."
           />
           </Link>
-         
         </div>
+
         <div className="img-5 col-3 text-center">
           {" "}
           {/* img woman */}
@@ -96,10 +90,10 @@ const Jumbotron = () => {
             className="card-img-top"
             alt="..."
           /></Link>
-         
         </div>
       </div>
     </div>
+   
   );
 };
 
