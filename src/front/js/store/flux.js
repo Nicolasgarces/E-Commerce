@@ -1,3 +1,4 @@
+console.log(process.env.BACKEND_URL);
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
@@ -14,7 +15,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 					initial: "white"
 				}
 			],
-			isLogged: false
+			isLogged: false,
+			catMen:[],
+			catWomen:[]
 		},
 		actions: {
 			// Use getActions to call a function within a fuction
@@ -26,7 +29,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					"email": email,
 					"password": password
 				}
-				fetch('https://3001-joaquinalzugara-jwtauthe-6cj8llonl0f.ws-us34.gitpod.io/api/login',{
+				fetch(process.env.BACKEND_URL + '/api/login',{
 						method: 'POST',
 						headers:{
 							'Content-Type':'application/json'
@@ -42,7 +45,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 						localStorage.setItem("token",data.access_token)
 						setStore({isLogged:true})
 					})
-	
+					
 			},
 			auth: ()=>{
 				let token = localStorage.getItem('token');
@@ -52,7 +55,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			getProfile: ()=>{
 				let token = localStorage.getItem('token');
 
-				fetch('https://3001-joaquinalzugara-jwtauthe-6cj8llonl0f.ws-us34.gitpod.io/api/user/profile',{
+				fetch(process.env.BACKEND_URL + '/api/user/profile',{
 					method: 'GET',
 					headers:{
 						'Content-Type':'application/json',
@@ -75,6 +78,23 @@ const getState = ({ getStore, getActions, setStore }) => {
 			// 		.then(data => setStore({ message: data.message }))
 			// 		.catch(error => console.log("Error loading message from backend", error));
 			// },
+
+
+			getCatMen: () => {
+				fetch("https://fakestoreapi.com/products/category/men's%20clothing") //fetch para obtener la categoria men//
+            	.then(res=>res.json())
+            	.then(json=> setStore({ catMen: json }))
+			},
+
+			getCatWomen: () => {
+				fetch("https://fakestoreapi.com/products/category/women's%20clothing") //fetch para obtener la categoria women//
+            	.then(res=>res.json())
+            	.then(json=> setStore({ catWomen: json }))
+			},
+
+
+			
+
 			changeColor: (index, color) => {
 				//get the store
 				const store = getStore();

@@ -3,11 +3,17 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 import ScrollToTop from "./component/scrollToTop";
 
 import  Home  from "./pages/home";
-import { Demo } from "./pages/demo";
+import { CatMen } from "./pages/catmen";
+import { CatWomen } from "./pages/catwomen";
+import { CreateUser} from "./pages/createuser";
+import { UserInfo} from "./pages/userinfo";
+import { UserOrders} from "./pages/userorders";
+import { NewProducts} from "./pages/newproducts";
 import { Single } from "./pages/single";
 import injectContext from "./store/appContext";
 
-import { Navbar } from "./component/navbar";
+import { Navbar } from "./component/Navbar";
+
 import { Footer } from "./component/footer";
 
 //create your first component
@@ -25,8 +31,23 @@ const Layout = () => {
 						<Route exact path="/">
 							<Home />
 						</Route>
-						<Route exact path="/demo">
-							<Demo />
+						<Route exact path="/catmen">
+							<CatMen />
+						</Route>
+						<Route exact path="/catwomen">
+							<CatWomen />
+						</Route>
+						<Route exact path="/createuser">
+							<CreateUser />
+						</Route>
+						<Route exact path="/userinfo">
+							<UserInfo />
+						</Route>
+						<Route exact path="/userorders">
+							<UserOrders />
+						</Route>
+						<Route exact path="/newproducts">
+							<NewProducts />
 						</Route>
 						<Route exact path="/single/:theid">
 							<Single />
