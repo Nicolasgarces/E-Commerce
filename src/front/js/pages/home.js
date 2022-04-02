@@ -1,18 +1,18 @@
-import React, {useContext}from "react";
+import React from "react";
 import "../../styles/home.css";
+import LoginForm from "../component/formLogin";
 import Jumbotron from "../component/Jumbotron";
-import {Context} from "../store/appContext";
+
 
 const Home = () => {
-	const {store, actions} = useContext (Context);
-	console.log(store.catMen);
-	console.log(store.catWomen);
 	return(
-		<div >
+		<div className="text-center mt-5">
 		<Jumbotron/>
 		</div>
 	)
 	
 };
+	
+
 
 export default Home;

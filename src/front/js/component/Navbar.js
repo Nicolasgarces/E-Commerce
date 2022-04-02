@@ -7,16 +7,16 @@ import "../../styles/nav.css";
 console.log("prueba", process.env.TEST);
 
 export const Navbar = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const { store, actions } = useContext(Context);
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    actions.login(email, password);
-    setEmail("");
-    setPassword("");
-  };
-  console.log(store.isLogged);
+const [email, setEmail] = useState("")
+const [password, setPassword] = useState("")
+const {store, actions} = useContext(Context)
+const handleSubmit = (e) => {
+  e.preventDefault()
+  actions.login(email, password);
+  setEmail("")
+  setPassword("")
+}
+console.log(store.isLogged);
 
   return (
     <nav class="navbar navbar-dark bg-dark">
@@ -63,55 +63,48 @@ export const Navbar = () => {
         </div>
 
         <div className="col-3 ">
-          <form className="d-flex topIcons dropdown ">
-            <a
-              type="button"
-              id="dropdownLoginUsuario"
-              data-bs-toggle="dropdown"
-              aria-expanded="false"
-            >
-              <i className="bi bi-person-circle  loginIcon "></i>
-            </a>
-            <div
-              className="dropdown-menu loginContainer "
-              aria-labelledby="dropdownLoginUsuario"
-            >
-              <div className="d-flex justify-content-between d-grid gap-2">
-                <h3>Sign in</h3>
-                <Link className=" text-right mt-2" to="#">
-                  Sign up
-                </Link>
-              </div>
-
-              <div className="form-floating form-group mt-3 ">
-                <input
-                  type="email"
-                  className="form-control"
-                  id="floatingInput"
-                  placeholder="name@example.com"
-                />
-                <label htmlFor="floatingInput">Email</label>
-              </div>
-              <div className="form-floating form-group mt-3">
-                <input
-                  type="password"
-                  className="form-control"
-                  id="floatingPassword"
-                  placeholder="Password"
-                />
-                <label htmlFor="floatingPassword">Password*</label>
-              </div>
-
-              <div className="invisible forgot-password text-right mt-2">
-                <Link to="#">You forgot,right?</Link>
-              </div>
-              <div className="d-grid gap-2 mt-3">
-                <button type="submit" className="btn btn-secondary">
-                  Login
-                </button>
-              </div>
-            </div>
-          </form>
+        <form className="d-flex topIcons dropdown " onSubmit={handleSubmit} noValidate>
+                    <a type="button" id="dropdownLoginUsuario" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i className="bi bi-person-circle  loginIcon "></i>
+                    </a>
+                    <div className="dropdown-menu loginContainer " aria-labelledby="dropdownLoginUsuario">
+                        <div className="d-flex justify-content-between d-grid gap-2">
+                            <h3>Sign in</h3>
+                            <Link className=" text-right mt-2" to="#">Sign up</Link>
+                        </div>
+                        
+                            <div className="form-floating form-group mt-3 ">
+                                <input 
+								type="email" 
+								className="form-control" 
+								id="floatingInput" 
+								placeholder="name@example.com"
+								onChange={(e)=>setEmail(e.target.value)}
+								value={email}
+								/>
+                                <label htmlFor="floatingInput">Email</label>
+                            </div>
+                            <div className="form-floating form-group mt-3">
+                                <input 
+								type="password" 
+								className="form-control" 
+								id="floatingPassword" 
+								placeholder="Password" 
+								onChange={(e)=>setPassword(e.target.value)}
+								value={password}
+								/>
+                                <label htmlFor="floatingPassword">Password*</label>
+                            </div>
+                        
+                        <div className="invisible forgot-password text-right mt-2">
+                             <Link to="#">You forgot,right?</Link>
+                        </div> 
+                        <div className="d-grid gap-2 mt-3">
+                                <button type="submit" className="btn btn-secondary">Login</button>
+                        </div> 
+                    </div>   
+			{/* <i className="bi bi-cart-check-fill"></i> */}
+		</form>
         </div>
 
         <div className="col-3">
