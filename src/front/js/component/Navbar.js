@@ -2,11 +2,12 @@ import React, { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
 import { Redirect } from "react-router-dom";
+import { Single } from "../pages/single";
 import "../../styles/nav.css";
 
 console.log("prueba", process.env.TEST);
 
-export const Navbar = () => {
+export const Navbar = () => {  
 const [email, setEmail] = useState("")
 const [password, setPassword] = useState("")
 const {store, actions} = useContext(Context)
@@ -133,7 +134,9 @@ console.log(store.isLogged);
               aria-label="Close"
             ></button>
           </div>
-          <div className="offcanvas-body">...</div>
+          <div className="offcanvas-body">
+            hola
+          </div>
         </div>
         </div>
 

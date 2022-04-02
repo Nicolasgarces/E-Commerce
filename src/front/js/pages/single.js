@@ -7,6 +7,8 @@ export const Single = props => {
 	const { store, actions } = useContext(Context);
 	const params = useParams();
 	console.log(store.item);
+  const [cartItems, setCartItems]= useState([])
+  console.log(cartItems);
 	useEffect(()=>{
 		actions.getItem(params.theid)
 	},[])
@@ -37,7 +39,7 @@ export const Single = props => {
                 />
               </div>
             </div>
-            <div className="col-3 mt-1">
+            {/* <div className="col-3 mt-1">
               <img
                 src={store.item.image}
                 data-mdb-img="https://mdbcdn.b-cdn.net/img/Photos/Horizontal/E-commerce/Vertical/14a.webp"
@@ -68,7 +70,7 @@ export const Single = props => {
                 alt="Gallery image 4"
                 className="w-100"
               />
-            </div>
+            </div> */}
           </div>
         </div>
       </div>
@@ -123,7 +125,7 @@ export const Single = props => {
           />
         </div>
       </div> */}
-      {/* <!-- Carousel wrapper --> */}
+  {/* <!-- Carousel wrapper --> */}
 <div
   id="carouselMultiItemExample"
   class="carousel slide carousel-dark text-center"
@@ -152,7 +154,7 @@ export const Single = props => {
   </div>
   {/* <!-- Inner --> */}
   <div class="carousel-inner py-4">
-    {/* <!-- Single item --> */}
+    {/* <!-- Single item 1--> */}
     <div class="carousel-item active">
       <div class="container">
         <div class="row">
@@ -164,7 +166,7 @@ export const Single = props => {
                 alt="Waterfall"
               />
               <div class="card-body">
-                <h5 class="card-title">Card title</h5>
+                <h5 class="card-title">Title</h5>
                 <p class="card-text">
                   Some quick example text to build on the card title and make up the bulk
                   of the card's content.
@@ -213,7 +215,7 @@ export const Single = props => {
       </div>
     </div>
 
-    {/* <!-- Single item --> */}
+    {/* <!-- Single item 2 --> */}
     <div class="carousel-item">
       <div class="container">
         <div class="row">
@@ -273,7 +275,8 @@ export const Single = props => {
         </div>
       </div>
     </div>
-    {/* <!-- Single item --> */}
+
+    {/* <!-- Single item 3 --> */}
     <div class="carousel-item">
       <div class="container">
         <div class="row">
