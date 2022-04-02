@@ -4,20 +4,19 @@ import { useState } from "react";
 export const ViewMyOrders = () => {
 
 	return (
-		<div className="mt-2">
+		<div className="py-5 container">
             <div className="row">
-                <div className="col-sm-4">                    
-                </div>
-                <div className="col-sm-8 mb-1 mt-1">
-                    <h5>User name: luisyosa</h5>
+                {/* <div className="col-sm-4">                    
+                </div> */}
+                <div className="col-sm-12 mb-1 mt-1">
                     <h5>Email: luisyosa20171@gmail.com</h5>
-                    <a href="#">Edit</a> | <a href="#">Password change</a>
+                    <a href="#">Password change</a>
                 </div>
             </div>
             <div className="row">
-                <div className="col-sm-4">                    
-                </div>
-                <div className="col-sm-8">
+                {/* <div className="col-sm-4">                    
+                </div> */}
+                <div className="col-sm-12">
                     <h2 className="mt-2 mb-0">Address book</h2>
                     <hr className="mt-0"></hr>
                     <h4>Invoicing and shipping address</h4>
@@ -29,9 +28,9 @@ export const ViewMyOrders = () => {
                 </div>
             </div>
             <div className="row">
-                <div className="col-sm-4">                    
-                </div>
-                <div className="col-sm-8">
+                {/* <div className="col-sm-4">                    
+                </div> */}
+                <div className="col-sm-12">
                     <h2 className="mt-2 mb-0">Recent orders</h2>
                     <hr className="mt-0"></hr>
                     <table class="table table-striped">
@@ -42,7 +41,7 @@ export const ViewMyOrders = () => {
                                 <th scope="col">Send To</th>
                                 <th scope="col">Total</th>
                                 <th scope="col">State</th>
-                                <th scope="col">Action</th>
+                                {/* <th scope="col">Action</th> */}
                             </tr>
                         </thead>
                         <tbody>
@@ -52,7 +51,7 @@ export const ViewMyOrders = () => {
                                 <td>Luis Yosa</td>
                                 <td>$50.000</td>
                                 <td>Pending</td>
-                                <td><a href="#">View Order</a></td>
+                                {/* <td><a href="#">View Order</a></td> */}
                             </tr>
                             <tr>
                                 <th scope="row">2</th>
@@ -60,7 +59,7 @@ export const ViewMyOrders = () => {
                                 <td>Luis Yosa</td>
                                 <td>$1.500.000</td>
                                 <td>Shipped</td>
-                                <td><a href="#">View Order</a></td>
+                                {/* <td><a href="#">View Order</a></td> */}
                             </tr>
                             <tr>
                                 <th scope="row">3</th>
@@ -68,7 +67,7 @@ export const ViewMyOrders = () => {
                                 <td>Luis Yosa</td>
                                 <td>$200.000</td>
                                 <td>Shipped</td>
-                                <td><a href="#">View Order</a></td>
+                                {/* <td><a href="#">View Order</a></td> */}
                             </tr>
                         </tbody>
                     </table>
