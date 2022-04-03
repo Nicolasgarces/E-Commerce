@@ -27,7 +27,7 @@ def login():
    
 
     user = User.query.filter_by(email=email).first()
-    print(user)
+    print(user.id)
 
     ## User does not exist
     if user is None:
@@ -39,7 +39,7 @@ def login():
 
 
     # Create Token
-    access_token = create_access_token(identity=email)
+    access_token = create_access_token(email,user.id)
 
     return jsonify({"access_token": access_token}), 200
     
@@ -51,8 +51,9 @@ def login():
 def get_profile():
     # Access the identity of the current user with get_jwt_identity
     current_user = get_jwt_identity()
+    print(current_user)
     user = User.query.filter_by(email=current_user).first()
-
+    
     if current_user == user.email:
         return jsonify(user.serialize()), 200
 
@@ -92,3 +93,23 @@ def update_user():
     }
     
     return jsonify(response_body), 200
+#Agregar Direccion de usuario
+@api.route('/user/update', methods=["PUT"])
+@jwt_required()
+def update_user():
+    body = request.get_json()
+    current_user = get_jwt_identity()
+    user = User.query.filter_by(email=current_user).first()
+    user.email = body["email"]
+    user.name = body["name"]
+    user.lastName = body["lastName"]
+    db.session.add(user)
+    db.session.commit()
+
+    response_body = {
+        "msg": "User modified successfuly "
+    }
+    
+    return jsonify(response_body), 200
+
+#Modificar direccion de usuario
