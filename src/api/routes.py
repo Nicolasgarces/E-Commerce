@@ -74,4 +74,21 @@ def create_account():
     
     return jsonify(response_body), 200
 
+
+@api.route('/user/update', methods=["PUT"])
+@jwt_required()
+def update_user():
+    body = request.get_json()
+    current_user = get_jwt_identity()
+    user = User.query.filter_by(email=current_user).first()
+    user.email = body["email"]
+    user.name = body["name"]
+    user.lastName = body["lastName"]
+    db.session.add(user)
+    db.session.commit()
+
+    response_body = {
+        "msg": "User modified successfuly "
+    }
     
+    return jsonify(response_body), 200
