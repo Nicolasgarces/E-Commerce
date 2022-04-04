@@ -78,18 +78,22 @@ const getState = ({ getStore, getActions, setStore }) => {
 			// 		.then(data => setStore({ message: data.message }))
 			// 		.catch(error => console.log("Error loading message from backend", error));
 			// },
-			
+
+
 			getCatMen: () => {
 				fetch("https://fakestoreapi.com/products/category/men's%20clothing") //fetch para obtener la categoria men//
             	.then(res=>res.json())
-            	.then(json=>console.log(json))
+            	.then(json=> setStore({ catMen: json }))
 			},
 
 			getCatWomen: () => {
-				fetch("https://fakestoreapi.com/products/category/women's%20clothing") //fetch para obtener la categoria men//
+				fetch("https://fakestoreapi.com/products/category/women's%20clothing") //fetch para obtener la categoria women//
             	.then(res=>res.json())
-            	.then(json=>console.log(json))
+            	.then(json=> setStore({ catWomen: json }))
 			},
+
+
+			
 
 			changeColor: (index, color) => {
 				//get the store
