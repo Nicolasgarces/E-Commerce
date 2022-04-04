@@ -80,14 +80,14 @@ def create_account():
 def add_car():
     body = request.get_json()
     print(body)
-    # passw = current_app.bcrypt.generate_password_hash(body["password"]).decode('utf-8')
     
-    # newUser = User(email= body["email"],name = body["name"], password = passw, lastName = body["lastName"])
-    # db.session.add(newUser)
-    # db.session.commit()
+    
+    newCart= OrderCart(quantity= body["quantity"],TotalMount = body["TotalMount"],productID = body["productID"],user_id = body["user_id"] )
+    db.session.add(newCart)
+    db.session.commit()
 
     response_body = {
-        "msg": "User added successfuly "
+        "msg": "Order added successfuly "
     }
     
     return jsonify(response_body), 200
