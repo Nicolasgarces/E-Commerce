@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 const WomenProducts = (props) => {
   const { store, actions } = useContext(Context);
   return (
-        <div className="card">
+        <div>
           <img
             className="card-img-top"
             src={props.image}
