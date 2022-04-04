@@ -1,9 +1,12 @@
 import React from "react";
+import "../../styles/footer.css"
 
 export const Footer = () => {
   return (
     <div>
-      <footer className="text-center text-lg-start bg-light text-muted bg-dark ">
+      {/* <footer className="text-center text-lg-start bg-light text-muted bg-dark footer"> */}
+      {/* <footer className="text-center text-lg-start bg-light text-muted bg-dark fixed-bottom"> */}
+      <footer className="text-center text-lg-start bg-light text-muted bg-dark footer">
         <div className="row p-2">
           <div className="text-center col-2">
             <img

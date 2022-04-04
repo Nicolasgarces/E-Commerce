@@ -74,4 +74,20 @@ def create_account():
     
     return jsonify(response_body), 200
 
+
+
+@api.route('/car', methods=["POST"])
+def add_car():
+    body = request.get_json()
+    print(body)
+    # passw = current_app.bcrypt.generate_password_hash(body["password"]).decode('utf-8')
     
+    # newUser = User(email= body["email"],name = body["name"], password = passw, lastName = body["lastName"])
+    # db.session.add(newUser)
+    # db.session.commit()
+
+    response_body = {
+        "msg": "User added successfuly "
+    }
+    
+    return jsonify(response_body), 200

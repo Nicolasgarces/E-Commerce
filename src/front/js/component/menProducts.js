@@ -16,6 +16,7 @@ const MenProducts = (props) => {
             <p className="card-text">{"$"+props.price}</p>
           </div>
         </div>
+        
   );
 };
 
