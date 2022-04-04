@@ -27,7 +27,6 @@ def login():
    
 
     user = User.query.filter_by(email=email).first()
-    print(user.id)
 
     ## User does not exist
     if user is None:
@@ -53,13 +52,16 @@ def get_profile():
     current_user = get_jwt_identity()
     print(current_user)
     user = User.query.filter_by(email=current_user).first()
-    
+
     if current_user == user.email:
         response_body = {
         #"address": user.address,
         "name": user.name,
         "lastName": user.lastName,
-        "email": user.email
+        "email": user.email,
+        "id": user.id,
+        "address": user.address[0].addressID
+        
     }
         return jsonify(response_body), 200
 
@@ -117,17 +119,46 @@ def insertAddress(idUser, address):
     return newAddress.addressID
 
 def insertUserAddress(userId, addressId):
-    print(addressId)
     user = User.query.filter_by(id=userId).first()
     user.address = int(addressId)
     db.session.commit()
     return 200
 
-#@api.route('/user/updateAddress', methods=["POST"])
-#def update_user_address(address,id):
-    
+def updateUserAddress(direccionId,newAddress):
+    address = Address.query.filter_by(addressID=direccionId).first()
+    address.address1 = newAddress
+    db.session.commit()
+    return 200
 
 #Modificar direccion de usuario
+@api.route('/user/updateAddress', methods=["POST"])
+@jwt_required()
+def update_user_address():
+    body = request.get_json()
+    current_user = get_jwt_identity()
+    user = User.query.filter_by(email=current_user).first()
+    userAddressId = user.address[0].addressID
+    updateUserAddress(userAddressId,body["address"])
+
+    response_body = {
+        "msg": "User modified successfuly "
+    }
+    
+    return jsonify(response_body), 200
+
+@api.route("/user/address", methods=["GET"])
+@jwt_required()
+def get_address():
+    current_user = get_jwt_identity()
+    user = User.query.filter_by(email=current_user).first()
+    userAddressId = user.address[0].addressID
+    address = Address.query.filter_by(addressID=userAddressId).first()
+
+    if current_user == user.email:
+        response_body = {
+        "address": address.address1
+    }
+        return jsonify(response_body), 200
 
 @api.route('/car', methods=["POST"])
 def add_car():
