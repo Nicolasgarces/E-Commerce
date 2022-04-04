@@ -13,7 +13,7 @@ export const CatMen = () => {
           <a
             className="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none"
           >
-            <span class="fs-5 d-none d-sm-inline">Category Men</span>
+            <span className="fs-5 d-none d-sm-inline">Category Men</span>
           </a>
           <ul
             className="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start"
@@ -58,7 +58,7 @@ export const CatMen = () => {
       {/* <h1 className='text-center py-2'>MEN CLOTHES</h1> */}
           {store.catMen.map((item, i) => {
             return (
-        <div className="col-sm-6 col-md-4 col-lg-3 py-4 d-inline-flex" style={{width: "300px"}} >
+        <div className="col-sm-6 col-md-4 col-lg-3 py-4 d-inline-flex" style={{width: "300px"}} key={i}>
               <MenProducts
                 key={i}
                 title={item.title}

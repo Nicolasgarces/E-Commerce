@@ -10,6 +10,7 @@ import { UserInfo} from "./pages/userinfo";
 import { UserOrders} from "./pages/userorders";
 import { NewProducts} from "./pages/newproducts";
 import { Single } from "./pages/single";
+import { MyOrders } from "./pages/viewMyOrders"
 import injectContext from "./store/appContext";
 
 import { Navbar } from "./component/Navbar";
@@ -48,6 +49,9 @@ const Layout = () => {
 						</Route>
 						<Route exact path="/newproducts">
 							<NewProducts />
+						</Route>
+						<Route exact path="/viewmyorders">
+							<MyOrders />
 						</Route>
 						<Route exact path="/single/:theid">
 							<Single />
