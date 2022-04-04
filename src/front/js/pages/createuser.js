@@ -1,7 +1,8 @@
 import React from 'react'
+import FormRegister from '../component/formRegister'
 
 export const CreateUser = () => {
   return (
-    <div>createuser</div>
+    <div><FormRegister/></div>
   )
 }
