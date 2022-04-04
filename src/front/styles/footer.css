@@ -1,7 +1,32 @@
-#footer {
+/* .footer {
   width: 100%;
   height: 81px;
-  position: absolute;
+  /* position: absolute; 
   bottom: 0;
   left: 0;
+} */
+
+/* footer {
+  background: #f9f8ba;
+  min-height: 5em;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+} */
+
+/* footer {
+  background: black;
+  color: white;
+  align-self: flex-end;
+  width: 100%;
+  height: 50px;
+  text-align: center;
+} */
+
+.footer {
+  height: 75px;
+}
+
+.content{  
+  min-height: calc(100vh - 225px - 75px);
 }
