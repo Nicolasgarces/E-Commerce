@@ -13,7 +13,7 @@ export const CatWomen = () => {
             <a
               className="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none"
             >
-              <span class="fs-5 d-none d-sm-inline">Category Women</span>
+              <span className="fs-5 d-none d-sm-inline">Category Women</span>
             </a>
             <ul
               className="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start"
@@ -73,7 +73,7 @@ export const CatWomen = () => {
           {/* <h1 className="text-center py-2">WOMEN CLOTHES</h1> */}
           {store.catWomen.map((item, i) => {
             return (
-              <div className="col-sm-6 col-md-4 col-lg-6 py-4 d-inline-flex" style={{width: "400px"}}>
+              <div className="col-sm-6 col-md-4 col-lg-6 py-4 d-inline-flex" style={{width: "400px"}} key={i}>
                 <WomenProducts
                   key={i}
                   title={item.title}
