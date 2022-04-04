@@ -24,7 +24,6 @@ export const FormRegister = () => {
 	const guardarUsuario = () => {
 		console.log(process.env.BACKEND_URL)
 		fetch(process.env.BACKEND_URL+'/api/user', {
-		// fetch('https://3001-joaquinalzugara-proyecto-dicm99lcsmx.ws-us38.gitpod.io/api/user', {
             method: 'POST',
             body: JSON.stringify(data),
             headers: {
