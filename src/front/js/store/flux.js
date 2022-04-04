@@ -18,7 +18,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 			isLogged: false,
 			catMen:[],
 			catWomen:[],
-			item: {}
+			item: {},
+			cartItems: []
 		},
 		actions: {
 			// Use getActions to call a function within a fuction

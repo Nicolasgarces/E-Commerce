@@ -2,13 +2,20 @@ import React, { useState, useEffect, useContext } from "react";
 import PropTypes from "prop-types";
 import { Link, useParams } from "react-router-dom";
 import { Context } from "../store/appContext";
+import Navbar from "../component/Navbar";
 
 export const Single = props => {
-	const { store, actions } = useContext(Context);
 	const params = useParams();
-	console.log(store.item);
+  const { store, actions } = useContext(Context);
+  console.log(store.item);
   const [cartItems, setCartItems]= useState([])
   console.log(cartItems);
+  const product = store.item
+  console.log(product);
+  const onAdd = (product) => {
+    setCartItems([...cartItems, {...store.item}])
+  }
+ 
 	useEffect(()=>{
 		actions.getItem(params.theid)
 	},[])
@@ -89,10 +96,11 @@ export const Single = props => {
                 title="Untis"
                 aria-label="Example text with button addon"
                 aria-describedby="button-addon1"
+                cartItems = {cartItems}
               ></input>
             </div>
             <div className="add-to-cart">
-              <button className="btn btn-dark">Add to cart</button>
+              <button className="btn btn-dark" onClick={onAdd}>Add to cart</button>
             </div>
           </div>
         </div>

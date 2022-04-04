@@ -11,6 +11,7 @@ export const Navbar = () => {
 const [email, setEmail] = useState("")
 const [password, setPassword] = useState("")
 const {store, actions} = useContext(Context)
+console.log(store.cartItems);
 const handleSubmit = (e) => {
   e.preventDefault()
   actions.login(email, password);
@@ -135,7 +136,7 @@ console.log(store.isLogged);
             ></button>
           </div>
           <div className="offcanvas-body">
-            hola
+            {store.cartItems.length === 0 && <div> Cart Is Empty </div>}
           </div>
         </div>
         </div>
