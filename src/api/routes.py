@@ -77,12 +77,15 @@ def create_account():
 
 
 @api.route('/car', methods=["POST"])
+@jwt_required()
 def add_car():
     body = request.get_json()
+    current_user = get_jwt_identity()
+    user = User.query.filter_by(email=current_user).first()
     print(body)
     
     
-    newCart= OrderCart(quantity= body["quantity"],TotalMount = body["TotalMount"],productID = body["productID"],user_id = body["user_id"] )
+    newCart= OrderCart(quantity= body["quantity"],TotalMount = body["TotalMount"],productID = body["productID"],user_id = user.id)
     db.session.add(newCart)
     db.session.commit()
 
