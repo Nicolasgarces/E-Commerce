@@ -2,7 +2,7 @@
 This module takes care of starting the API Server, Loading the DB and Adding the endpoints
 """
 from flask import Flask, request, jsonify, url_for, Blueprint, current_app
-from api.models import db, User
+from api.models import db, User, Address
 from api.utils import generate_sitemap, APIException
 from flask_jwt_extended import jwt_required, create_access_token, JWTManager, get_jwt_identity
 
@@ -55,7 +55,13 @@ def get_profile():
     user = User.query.filter_by(email=current_user).first()
     
     if current_user == user.email:
-        return jsonify(user.serialize()), 200
+        response_body = {
+        #"address": user.address,
+        "name": user.name,
+        "lastName": user.lastName,
+        "email": user.email
+    }
+        return jsonify(response_body), 200
 
 
     return jsonify(logged_in_as=current_user), 400
@@ -63,17 +69,26 @@ def get_profile():
 @api.route('/user', methods=["POST"])
 def create_account():
     body = request.get_json()
-    passw = current_app.bcrypt.generate_password_hash(body["password"]).decode('utf-8')
-    
-    newUser = User(email= body["email"],name = body["name"], password = passw, lastName = body["lastName"])
-    db.session.add(newUser)
-    db.session.commit()
-
+    newUserId = insertUser(body)
+    userAddress = insertAddress(newUserId, body["address"])
+    print(userAddress)
+   # insertUserAddress(newUserId,userAddress)
     response_body = {
         "msg": "User added successfuly "
     }
     
     return jsonify(response_body), 200
+
+def insertUser(body):
+    passw = current_app.bcrypt.generate_password_hash(body["password"]).decode('utf-8')
+    newUser = User(email= body["email"],name = body["name"], password = passw, lastName = body["lastName"])
+    db.session.add(newUser)
+    db.session.commit()
+    response_body = {
+        "id": newUser.id
+    }
+    return response_body["id"]
+    
 
 
 @api.route('/user/update', methods=["PUT"])
@@ -95,23 +110,22 @@ def update_user():
     return jsonify(response_body), 200
     
 #Agregar Direccion de usuario
-@api.route('/user/update', methods=["PUT"])
-@jwt_required()
-def update_user():
-    body = request.get_json()
-    current_user = get_jwt_identity()
-    user = User.query.filter_by(email=current_user).first()
-    user.email = body["email"]
-    user.name = body["name"]
-    user.lastName = body["lastName"]
-    db.session.add(user)
+def insertAddress(idUser, address):
+    newAddress = Address(address1= address, user_id = idUser)
+    db.session.add(newAddress)
     db.session.commit()
+    return newAddress.addressID
 
-    response_body = {
-        "msg": "User modified successfuly "
-    }
+def insertUserAddress(userId, addressId):
+    print(addressId)
+    user = User.query.filter_by(id=userId).first()
+    user.address = int(addressId)
+    db.session.commit()
+    return 200
+
+#@api.route('/user/updateAddress', methods=["POST"])
+#def update_user_address(address,id):
     
-    return jsonify(response_body), 200
 
 #Modificar direccion de usuario
 
