@@ -4,7 +4,7 @@ import { useState } from "react";
 export const ViewMyOrders = () => {
 
 	return (
-		<div className="py-5 container">
+		<div className="py-5 container content">
             <div className="row">
                 {/* <div className="col-sm-4">                    
                 </div> */}
