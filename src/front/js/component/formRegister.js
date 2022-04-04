@@ -41,8 +41,9 @@ export const FormRegister = () => {
 	}
 
 	return (
-		<div className="d-flex justify-content-center">
+		<div className="d-flex justify-content-center content py-5">
 			<div className="w-25">
+				<h2>Register Form</h2>
 				<div className="form-group mt-3">
 					<input
 						type="text"
