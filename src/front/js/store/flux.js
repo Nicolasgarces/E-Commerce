@@ -100,6 +100,10 @@ const getState = ({ getStore, getActions, setStore }) => {
             	.then(json=>setStore({item: json}))
 			},
 
+			onAdd:(cart)=>{
+				setStore({cartItems: getStore().cartItems.concat(cart)})
+			  },
+
 			changeColor: (index, color) => {
 				//get the store
 				const store = getStore();

@@ -19,7 +19,6 @@ const handleSubmit = (e) => {
   setPassword("")
 }
 console.log(store.isLogged);
-
   return (
     <nav class="navbar navbar-dark bg-dark">
       <div className="row">

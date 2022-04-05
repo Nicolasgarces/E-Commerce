@@ -9,12 +9,12 @@ export const Single = props => {
   const { store, actions } = useContext(Context);
   console.log(store.item);
   const [cartItems, setCartItems]= useState([])
-  console.log(cartItems);
-  const product = store.item
-  console.log(product);
-  const onAdd = (product) => {
-    setCartItems([...cartItems, {...store.item}])
-  }
+  // console.log(cartItems);
+  // const product = store.item
+  // console.log(product);
+  // const onAdd = () => {
+  //   setCartItems([...cartItems, {...store.item}])
+  // }
  
 	useEffect(()=>{
 		actions.getItem(params.theid)
@@ -100,7 +100,7 @@ export const Single = props => {
               ></input>
             </div>
             <div className="add-to-cart">
-              <button className="btn btn-dark" onClick={onAdd}>Add to cart</button>
+              <button className="btn btn-dark" onClick={()=>actions.onAdd}>Add to cart</button>
             </div>
           </div>
         </div>
