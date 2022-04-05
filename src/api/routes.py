@@ -99,7 +99,6 @@ def update_user():
     body = request.get_json()
     current_user = get_jwt_identity()
     user = User.query.filter_by(email=current_user).first()
-    user.email = body["email"]
     user.name = body["name"]
     user.lastName = body["lastName"]
     db.session.add(user)

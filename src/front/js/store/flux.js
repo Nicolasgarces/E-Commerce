@@ -19,7 +19,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 			],
 			isLogged: false,
 			catMen:[],
-			catWomen:[]
+			catWomen:[],
+			infoProfile:{},
 		},
 		actions: {
 			// Use getActions to call a function within a fuction
@@ -45,6 +46,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 						return response.json()})
 					.then(data => {
 						localStorage.setItem("token",data.access_token)
+						console.log(localStorage.getItem('token'));
 						setStore({isLogged:true})
 					})
 					
@@ -96,6 +98,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 
 			getProfile: () =>{
+				let token = localStorage.getItem('token');
 				fetch(process.env.BACKEND_URL + '/api/user/profile',{
 					method: 'GET',
 					headers:{
@@ -108,9 +111,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 						alert('Bad user or password')
 					}
 					return response.json()})
-				.then(data => {
-				console.log(data);
-				})
+				.then(json => setStore({infoProfile: json}))
+				
 			},
 		
 			editProfile: () =>{

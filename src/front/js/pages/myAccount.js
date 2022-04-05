@@ -1,10 +1,16 @@
-import React, { useContext} from 'react'
+import React, { useContext, useEffect} from 'react'
 import { Context } from "../store/appContext";
 import { Link } from 'react-router-dom';
 import Swal from 'sweetalert2'
 
 export const MyAccount = () => {
     const { store, actions } = useContext(Context);
+    console.log(store.infoProfile.name);
+    useEffect(() => {
+      actions.getProfile();
+    }, []);
+
+
   return (
     <div className="container-fluid">
     <div className="row flex-nowrap">
@@ -37,7 +43,7 @@ export const MyAccount = () => {
   <hr className="my-4"/>
   <h5>Contact Information</h5>
   <p className="lead">
-    Name Lastname
+  {store.infoProfile.name} {" " + store.infoProfile.lastName}
   </p>
   <span onClick={()=> actions.editProfile()}>
     Edit
