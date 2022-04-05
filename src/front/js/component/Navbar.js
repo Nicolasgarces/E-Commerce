@@ -87,7 +87,7 @@ export const Navbar = () => {
             >
               <div className="d-flex justify-content-between d-grid gap-2">
                 <h3>Sign in</h3>
-                <a className=" text-right mt-2">Sign up</a>
+                <a className=" text-right mt-2" href="/createuser">Sign up</a>
               </div>
 
               <div className="form-floating form-group mt-3 ">
