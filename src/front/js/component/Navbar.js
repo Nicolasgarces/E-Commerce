@@ -68,7 +68,8 @@ export const Navbar = () => {
         </div>
 
         <div className="col-lg-3 d-flex flex-column align-items-end justify-content-center ">
-          <form
+         {store.isLogged ? <span>logueado</span> : 
+         <form
             className="d-flex topIcons dropdown "
             onSubmit={handleSubmit}
             noValidate
@@ -123,6 +124,7 @@ export const Navbar = () => {
               </div>
             </div>
           </form>
+          } 
         </div>
 
         <div className="col-lg-1 d-flex flex-column align-items-end justify-content-center">
