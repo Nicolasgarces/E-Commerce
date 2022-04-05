@@ -1,6 +1,7 @@
 import React, { useContext} from 'react'
 import { Context } from "../store/appContext";
 import { Link } from 'react-router-dom';
+import Swal from 'sweetalert2'
 
 export const MyAccount = () => {
     const { store, actions } = useContext(Context);
@@ -14,19 +15,14 @@ export const MyAccount = () => {
             id="menu"
           >
             <li className="nav-item">
-              <a className="nav-link text-white" href="#">
+              <Link to={'/myaccount/'} className="nav-link text-white" href="#">
                 My Account
-              </a>
+              </Link>
             </li>
             <li>
-              <a className="nav-link text-white" href="#">
+              <Link to={'/userorders/'} className="nav-link text-white" href="#">
                 My Orders
-              </a>
-            </li>
-            <li>
-              <a className="nav-link text-white" href="#">
-                My Addresses
-              </a>{" "}
+              </Link>
             </li>
           </ul>
           <hr />
@@ -43,12 +39,9 @@ export const MyAccount = () => {
   <p className="lead">
     Name Lastname
   </p>
-  <p className="lead">
-    email@gmail.com
-  </p>
-  <Link to={'/'}>
+  <span onClick={()=> actions.editProfile()}>
     Edit
-  </Link>
+  </span>
 </div>
            
         </div>

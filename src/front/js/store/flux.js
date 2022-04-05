@@ -1,3 +1,5 @@
+import Swal from 'sweetalert2'
+
 console.log(process.env.BACKEND_URL);
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
@@ -70,6 +72,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			logout: ()=>{
 				localStorage.removeItem('token');
 				setStore({isLogged:false})
+				console.log("funciona");
 			},
 			// getMessage: () => {
 			// 	// fetching data from the backend
@@ -92,6 +95,97 @@ const getState = ({ getStore, getActions, setStore }) => {
             	.then(json=> setStore({ catWomen: json }))
 			},
 
+			getProfile: () =>{
+				fetch(process.env.BACKEND_URL + '/api/user/profile',{
+					method: 'GET',
+					headers:{
+						'Content-Type':'application/json',
+						'Authorization': 'Bearer ' + token
+					},
+				})
+				.then((response)=> {
+					if(response.status === 401){
+						alert('Bad user or password')
+					}
+					return response.json()})
+				.then(data => {
+				console.log(data);
+				})
+			},
+		
+			editProfile: () =>{
+				Swal.fire({
+					title: 'Submit your Github username',
+					input: 'text',
+					inputAttributes: {
+					  autocapitalize: 'off'
+					},
+					showCancelButton: true,
+					confirmButtonText: 'Look up',
+					showLoaderOnConfirm: true,
+					preConfirm: () => {
+						let token = localStorage.getItem('token');
+					  return fetch(process.env.BACKEND_URL + '/api/update',{
+						method: 'put',
+						headers:{
+							'Content-Type':'application/json',
+							'Authorization': 'Bearer ' + token,
+						},
+					})
+					.then((response)=> response.json())
+					.then(data => {
+					console.log(data)
+					})
+					},
+					allowOutsideClick: () => !Swal.isLoading()
+				  }).then((result) => {
+					if (result.isConfirmed) {
+					  Swal.fire({
+						title: `${result.value.login}'s avatar`,
+						imageUrl: result.value.avatar_url
+					  })
+					}
+				  })
+				
+			},
+
+			getAdress: () => {
+				let token = localStorage.getItem('token');
+				fetch(process.env.BACKEND_URL + '/api/user/address',{
+						method: 'GET',
+						headers:{
+							'Content-Type':'application/json',
+							'Authorization': 'Bearer ' + token
+						},
+					})
+					.then((response)=> {
+						if(response.status === 401){
+							alert('Bad user or password')
+						}
+						return response.json()})
+					.then(data => {
+					console.log(data);
+					})	
+			},
+
+			updateAdress: () => {
+				let token = localStorage.getItem('token');
+				fetch(process.env.BACKEND_URL + '/api/user/updateAddress',{
+						method: 'POST',
+						headers:{
+							'Content-Type':'application/json',
+							'Authorization': 'Bearer ' + token
+						},
+					})
+					.then((response)=> {
+						if(response.status === 401){
+							alert('Bad user or password')
+						}
+						return response.json()})
+					.then(data => {
+					console.log(data);
+					})	
+			},
 
 			
 

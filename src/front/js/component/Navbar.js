@@ -64,11 +64,20 @@ export const Navbar = () => {
                 Women
               </NavLink>
             </li>
+            {store.isLogged ?  <li className="nav-item">
+              <NavLink
+                to={`/myaccount/`}
+                activeClassName="nav-link text-white"
+                className="nav-link text-white"
+              >
+                My account
+              </NavLink>
+            </li> : null }
           </ul>
         </div>
 
         <div className="col-lg-3 d-flex flex-column align-items-end justify-content-center ">
-         {store.isLogged ? <span>logueado</span> : 
+         {store.isLogged ? <span className="text-white"> Logout <i className="bi bi-box-arrow-right loginIcon text-white h4" onClick={()=>actions.logout()}></i></span> : 
          <form
             className="d-flex topIcons dropdown "
             onSubmit={handleSubmit}
