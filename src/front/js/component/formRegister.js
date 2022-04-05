@@ -9,7 +9,8 @@ export const FormRegister = () => {
         name: '',
         lastName: '',
 		email: '',
-        password: '',	
+        password: '',
+		address: ''	
     }
 
 	const [data, setData] = useState(defaultData);
@@ -39,7 +40,7 @@ export const FormRegister = () => {
 					Swal.fire({
 						// position: 'top-end',
 						icon: 'success',
-						title: 'Your work has been saved',
+						title: 'Your account has been created',
 						// showConfirmButton: false,
 						// timer: 5000
 						})
@@ -62,8 +63,7 @@ export const FormRegister = () => {
 				
 				// alert("Creado con éxito")
 
-				console.log(data);
-				
+				console.log(data);				
 
 				setData(defaultData)
 				// document.location.href="/"
@@ -98,6 +98,18 @@ export const FormRegister = () => {
 								onChange={onChangeData}
 								name = "lastName"
 								value={data.lastName}
+							/>
+						</div>
+						<div className="form-group mt-3">
+							<input
+								type="text"
+								className="form-control"
+								id="address"
+								aria-describedby="lastNameHelp"
+								placeholder="Address"
+								onChange={onChangeData}
+								name = "address"
+								value={data.address}
 							/>
 						</div>
 						<div className="form-group mt-3">
