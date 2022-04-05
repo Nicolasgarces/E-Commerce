@@ -41,6 +41,7 @@ export const FormRegister = () => {
 						// position: 'top-end',
 						icon: 'success',
 						title: 'Your account has been created',
+						confirmButtonColor: '#212529'
 						// showConfirmButton: false,
 						// timer: 5000
 						})
@@ -51,6 +52,7 @@ export const FormRegister = () => {
 					Swal.fire({
 						icon: 'error',
 						title: 'Email already exists',
+						confirmButtonColor: '#212529'
 						})
 					
 					setIsRegister(false)
@@ -63,7 +65,7 @@ export const FormRegister = () => {
 				
 				// alert("Creado con éxito")
 
-				console.log(data);				
+				// console.log(data);
 
 				setData(defaultData)
 				// document.location.href="/"
