@@ -140,7 +140,7 @@ def update_user_address():
     updateUserAddress(userAddressId,body["address"])
 
     response_body = {
-        "msg": "User modified successfuly "
+        "msg": "User address modified successfuly "
     }
     
     return jsonify(response_body), 200

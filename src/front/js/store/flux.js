@@ -21,6 +21,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			catMen:[],
 			catWomen:[],
 			infoProfile:{},
+			infoAddress:{},
 		},
 		actions: {
 			// Use getActions to call a function within a fuction
@@ -115,35 +116,52 @@ const getState = ({ getStore, getActions, setStore }) => {
 				
 			},
 		
-			editProfile: () =>{
+			editProfile: (isNameToModify, infoProfile) =>{
+				let name;
+				let lastName;
+				let msgResult;
 				Swal.fire({
-					title: 'Submit your Github username',
+					title: 'Type your new value',
 					input: 'text',
 					inputAttributes: {
 					  autocapitalize: 'off'
 					},
 					showCancelButton: true,
-					confirmButtonText: 'Look up',
+					confirmButtonText: 'Save',
 					showLoaderOnConfirm: true,
-					preConfirm: () => {
+					preConfirm: (value) => {
 						let token = localStorage.getItem('token');
-					  return fetch(process.env.BACKEND_URL + '/api/update',{
-						method: 'put',
+						if(isNameToModify){
+							name = value
+							lastName = infoProfile.lastName
+							infoProfile.name = value
+						}else{
+							name = infoProfile.name
+							lastName = value
+							infoProfile.lastName = value
+						}
+						const raw = {
+							"name": name,
+							"lastName": lastName
+						}
+					  return fetch(process.env.BACKEND_URL + '/api/user/update',{
+						method: 'PUT',
 						headers:{
 							'Content-Type':'application/json',
 							'Authorization': 'Bearer ' + token,
 						},
+						body: JSON.stringify(raw)
 					})
 					.then((response)=> response.json())
 					.then(data => {
-					console.log(data)
+						msgResult = data;
 					})
 					},
 					allowOutsideClick: () => !Swal.isLoading()
 				  }).then((result) => {
 					if (result.isConfirmed) {
 					  Swal.fire({
-						title: `${result.value.login}'s avatar`,
+						title: `${msgResult.msg}`,
 						imageUrl: result.value.avatar_url
 					  })
 					}
@@ -151,7 +169,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				
 			},
 
-			getAdress: () => {
+			getAddress: () => {
 				let token = localStorage.getItem('token');
 				fetch(process.env.BACKEND_URL + '/api/user/address',{
 						method: 'GET',
@@ -165,29 +183,51 @@ const getState = ({ getStore, getActions, setStore }) => {
 							alert('Bad user or password')
 						}
 						return response.json()})
-					.then(data => {
-					console.log(data);
-					})	
+						.then(json => setStore({infoAddress: json}))
+						// .then(json => console.log(json))
+							
 			},
 
-			updateAdress: () => {
-				let token = localStorage.getItem('token');
-				fetch(process.env.BACKEND_URL + '/api/user/updateAddress',{
-						method: 'POST',
-						headers:{
-							'Content-Type':'application/json',
-							'Authorization': 'Bearer ' + token
+				updateAddress: () =>{
+					let msgResult;
+					Swal.fire({
+						title: 'Type your new value',
+						input: 'text',
+						inputAttributes: {
+						  autocapitalize: 'off'
 						},
-					})
-					.then((response)=> {
-						if(response.status === 401){
-							alert('Bad user or password')
+						showCancelButton: true,
+						confirmButtonText: 'Save',
+						showLoaderOnConfirm: true,
+						preConfirm: (value) => {
+							let token = localStorage.getItem('token');
+							const raw = {
+								"address": value,
+							}
+						  return fetch(process.env.BACKEND_URL + '/api/user/updateAddress',{
+							method: 'POST',
+							headers:{
+								'Content-Type':'application/json',
+								'Authorization': 'Bearer ' + token,
+							},
+							body: JSON.stringify(raw)
+						})
+						.then((response)=> response.json())
+						.then(data => {
+							msgResult = data;
+						})
+						},
+						allowOutsideClick: () => !Swal.isLoading()
+					  }).then((result) => {
+						if (result.isConfirmed) {
+						  Swal.fire({
+							title: `${msgResult.msg}`,
+							imageUrl: result.value.avatar_url
+						  })
 						}
-						return response.json()})
-					.then(data => {
-					console.log(data);
-					})	
-			},
+					  })
+					
+				},
 
 			
 
