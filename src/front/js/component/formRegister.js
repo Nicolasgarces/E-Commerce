@@ -10,15 +10,15 @@ export const FormRegister = () => {
         lastName: '',
 		email: '',
         password: '',
-		address: ''	
+		address: ''	,
     }
 
 	const [data, setData] = useState(defaultData);
 	const [isRegister, setIsRegister] = useState(false);
+	const [onCheck, setonCheck] = useState(false);
 
 	const onChangeData = (e) => {
 
-		// console.log(e.target);
 		setData({
             ...data,
             [e.target.name]: e.target.value,
@@ -26,45 +26,79 @@ export const FormRegister = () => {
 	}
 
 	const guardarUsuario = () => {
-		fetch(process.env.BACKEND_URL+'/api/user', {
-            method: 'POST',
-            body: JSON.stringify(data),
-            headers: {
-                Accept: 'application/json',
-                'Content-Type': 'application/json',
-            },
-        })
-		.then((response) => {
 
-			if(response.status === 201){
+		if (data.name === "" || data.lastName === "" || data.address === "" || data.email === "" || data.password === "") {
+			
+			Swal.fire({
+				icon: 'warning',
+				title: 'Fields marked with * are required',
+				confirmButtonColor: '#212529'
+				})
+
+		} else {
+			
+			if(/^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i.test(data.email)){
+
+				if(onCheck === true){
+					
+					fetch(process.env.BACKEND_URL+'/api/user', {
+						method: 'POST',
+						body: JSON.stringify(data),
+						headers: {
+							Accept: 'application/json',
+							'Content-Type': 'application/json',
+						},
+					})
+					.then((response) => {
+			
+						if(response.status === 201){
+							Swal.fire({
+								icon: 'success',
+								title: 'Your account has been created',
+								confirmButtonColor: '#212529'
+								})
+							
+							setIsRegister(true)
+			
+						}else if(response.status === 200){
+							Swal.fire({
+								icon: 'error',
+								title: 'Email already exists',
+								confirmButtonColor: '#212529'
+								})
+							
+							setIsRegister(false)
+						}
+			
+						return response.json()
+			
+					})
+					.then((data) => {
+						
+						setData(defaultData)
+
+					});
+				}else{
+
+					Swal.fire({
+						icon: 'warning',
+						title: 'Accept the terms and conditions to continue',
+						confirmButtonColor: '#212529'
+						})
+
+				}
+				
+			}else{
+
 				Swal.fire({
-					icon: 'success',
-					title: 'Your account has been created',
+					icon: 'warning',
+					title: 'Enter a valid email',
 					confirmButtonColor: '#212529'
 					})
 				
-				setIsRegister(true)
-
-			}else if(response.status === 200){
-				Swal.fire({
-					icon: 'error',
-					title: 'Email already exists',
-					confirmButtonColor: '#212529'
-					})
-				
-				setIsRegister(false)
 			}
 
-			return response.json()
-
-		})
-		.then((data) => {
-			
-			setData(defaultData)
-			// alert("Creado con éxito")
-			// console.log(data);
-			// document.location.href="/"
-		});
+		}		
 	}
 
 	return (
@@ -138,6 +172,7 @@ export const FormRegister = () => {
 								type="checkbox"
 								className="form-check-input"
 								id="check"
+								onChange={(e)=>setonCheck(e.target.checked)}
 							/>
 							<label className="form-check-label" htmlFor="check">
 								I accept Terms and Conditions
