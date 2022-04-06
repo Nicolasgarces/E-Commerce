@@ -19,7 +19,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 			catMen:[],
 			catWomen:[],
 			item: {},
-			cartItems: []
+			cartItems: [],
+			cartQuantity: []
 		},
 		actions: {
 			// Use getActions to call a function within a fuction
@@ -100,8 +101,17 @@ const getState = ({ getStore, getActions, setStore }) => {
             	.then(json=>setStore({item: json}))
 			},
 
-			onAdd:(cart)=>{
-				setStore({cartItems: getStore().cartItems.concat(cart)})
+			onAdd:(product)=>{
+				setStore({cartItems: getStore().cartItems.concat(product)})
+			  },
+
+			getQuantity:(number) => {
+				setStore({cartQuantity: getStore().cartQuantity.concat(number)})
+			},
+
+			deleteCart:(i)=>{
+				setStore({cartItems: getStore().cartItems.filter(
+				  (item,index) => index !== i)})
 			  },
 
 			changeColor: (index, color) => {

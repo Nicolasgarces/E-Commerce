@@ -8,7 +8,8 @@ export const Single = props => {
 	const params = useParams();
   const { store, actions } = useContext(Context);
   console.log(store.item);
-  const [cartItems, setCartItems]= useState([])
+  console.log(store.cartItems);
+  // const [cartItems, setCartItems]= useState([])
   // console.log(cartItems);
   // const product = store.item
   // console.log(product);
@@ -96,12 +97,13 @@ export const Single = props => {
                 title="Untis"
                 aria-label="Example text with button addon"
                 aria-describedby="button-addon1"
-                cartItems = {cartItems}
+                onChange={(e) => actions.getQuantity(e.target.value)}
               ></input>
             </div>
             <div className="add-to-cart">
-              <button className="btn btn-dark" onClick={()=>actions.onAdd}>Add to cart</button>
+              <button className="btn btn-dark" onClick={()=>actions.onAdd(store.item)}>Add to cart</button>
             </div>
+            <span></span>
           </div>
         </div>
       </div>
