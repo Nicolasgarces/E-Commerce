@@ -11,10 +11,9 @@ import { UserOrders} from "./pages/userorders";
 import { NewProducts} from "./pages/newproducts";
 import { Single } from "./pages/single";
 import { MyOrders } from "./pages/viewMyOrders"
+import { MyAccount } from "./pages/myAccount"
 import injectContext from "./store/appContext";
-
 import { Navbar } from "./component/Navbar";
-
 import { Footer } from "./component/footer";
 
 //create your first component
@@ -52,6 +51,9 @@ const Layout = () => {
 						</Route>
 						<Route exact path="/viewmyorders">
 							<MyOrders />
+						</Route>
+						<Route exact path="/myaccount">
+							<MyAccount />
 						</Route>
 						<Route exact path="/single/:theid">
 							<Single />
