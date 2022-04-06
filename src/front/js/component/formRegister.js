@@ -18,7 +18,7 @@ export const FormRegister = () => {
 
 	const onChangeData = (e) => {
 
-		console.log(e.target);
+		// console.log(e.target);
 		setData({
             ...data,
             [e.target.name]: e.target.value,
@@ -34,42 +34,37 @@ export const FormRegister = () => {
                 'Content-Type': 'application/json',
             },
         })
-            .then((response) => {
+		.then((response) => {
 
-				if(response.status === 201){
-					Swal.fire({
-						// position: 'top-end',
-						icon: 'success',
-						title: 'Your account has been created',
-						confirmButtonColor: '#212529'
-						// showConfirmButton: false,
-						// timer: 5000
-						})
-					
-					setIsRegister(true)
-
-				}else if(response.status === 200){
-					Swal.fire({
-						icon: 'error',
-						title: 'Email already exists',
-						confirmButtonColor: '#212529'
-						})
-					
-					setIsRegister(false)
-				}
-
-				return response.json()
-
-			})
-            .then((data) => {
+			if(response.status === 201){
+				Swal.fire({
+					icon: 'success',
+					title: 'Your account has been created',
+					confirmButtonColor: '#212529'
+					})
 				
-				// alert("Creado con éxito")
+				setIsRegister(true)
 
-				// console.log(data);
+			}else if(response.status === 200){
+				Swal.fire({
+					icon: 'error',
+					title: 'Email already exists',
+					confirmButtonColor: '#212529'
+					})
+				
+				setIsRegister(false)
+			}
 
-				setData(defaultData)
-				// document.location.href="/"
-            });
+			return response.json()
+
+		})
+		.then((data) => {
+			
+			setData(defaultData)
+			// alert("Creado con éxito")
+			// console.log(data);
+			// document.location.href="/"
+		});
 	}
 
 	return (
@@ -84,10 +79,11 @@ export const FormRegister = () => {
 								className="form-control"
 								id="firtsName"
 								aria-describedby="firtsNameHelp"
-								placeholder="First Name"
+								placeholder="First Name*"
 								onChange={onChangeData}
 								name = "name"
 								value={data.name}
+								required
 							/>
 						</div>
 						<div className="form-group mt-3">
@@ -96,7 +92,7 @@ export const FormRegister = () => {
 								className="form-control"
 								id="lastName"
 								aria-describedby="lastNameHelp"
-								placeholder="Last Name"
+								placeholder="Last Name*"
 								onChange={onChangeData}
 								name = "lastName"
 								value={data.lastName}
@@ -108,7 +104,7 @@ export const FormRegister = () => {
 								className="form-control"
 								id="address"
 								aria-describedby="lastNameHelp"
-								placeholder="Address"
+								placeholder="Address*"
 								onChange={onChangeData}
 								name = "address"
 								value={data.address}
@@ -120,7 +116,7 @@ export const FormRegister = () => {
 								className="form-control"
 								id="email"
 								aria-describedby="emailHelp"
-								placeholder="Email"
+								placeholder="Email*"
 								onChange={onChangeData}
 								name = "email"
 								value={data.email}
@@ -131,7 +127,7 @@ export const FormRegister = () => {
 								type="password"
 								className="form-control"
 								id="password"
-								placeholder="Password"
+								placeholder="Password*"
 								onChange={onChangeData}
 								name = "password"
 								value={data.password}
@@ -153,7 +149,7 @@ export const FormRegister = () => {
 					</div>
 				</div>
 			}
-		</>				
+		</>	
 	);
 };
 
