@@ -124,6 +124,12 @@ const getState = ({ getStore, getActions, setStore }) => {
 					setStore({cartItems: getStore().cartItems.concat(newItem)})
 			  }},
 
+			deleteCart:(id)=>{
+				const removedItem = getStore().cartItems.find(item => item.id === id)
+				console.log(removedItem);
+				setStore({cartItems: getStore().cartItems.filter(item => item.id !== id)})
+			  },
+
 			getQuantity:(number) => {
 				setStore({cartQuantity: getStore().cartQuantity.concat(number)})
 			},
@@ -257,11 +263,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 					  })
 					
 				},
-
-			deleteCart:(id)=>{
-				setStore({cartItems: getStore().cartItems.filter(
-				  (item,index) => index !== id)})
-			  },
 
 			changeColor: (index, color) => {
 				//get the store

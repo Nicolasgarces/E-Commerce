@@ -180,6 +180,7 @@ export const Navbar = () => {
             image={item.image}
             price={item.price}
             quantity={item.quantity}
+            id={item.id}
             />): <span> Cart is Empty</span>}
 
               {/* Cart Price */}
