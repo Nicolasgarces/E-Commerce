@@ -6,6 +6,7 @@ import { Redirect } from "react-router-dom";
 import { Single } from "../pages/single";
 import "../../styles/nav.css";
 import {Cartitem} from "./cartItem"
+import { CartCheckOut } from "./cartCheckOut";
 
 console.log("prueba", process.env.TEST);
 
@@ -181,40 +182,17 @@ export const Navbar = () => {
             price={item.price}
             quantity={item.quantity}
             id={item.id}
-            />): <span> Cart is Empty</span>}
+            />): <h5 className="text-center"> Cart is Empty</h5>}
 
               {/* Cart Price */}
-              
-            <div className="offcanvas-body d-flex align-items-end">
-              <div className="mb-3" style={{ maxWidth: "540px" }}>
-                <div className="row g-0">
-                  <div className="col-lg-6">
-                    <p className="card-title text-muted">Subtotal</p>
-                  </div>
-                  <div className="col-lg-6 d-flex justify-content-end">
-                    <p className="card-title text-muted">$ {store.cartItems.length > 0 ?store.cartQuantity[store.cartQuantity.length-1] * store.cartItems[0]?.price:<span>0</span>}</p>
-                  </div>
-
-                  {/* <div className="col-lg-6">
-                    <p className="card-title text-muted">Shipping</p>
-                  </div>
-                  <div className="col-lg-6 d-flex justify-content-end">
-                    <p className="card-title text-muted">$000.000</p>
-                  </div> */}
-                  <div className="col-lg-6">
-                    <h6 className="card-title">Total</h6>
-                  </div>
-                  <div className="col-lg-6 d-flex justify-content-end">
-                    <h6 className="card-title">$ {store.cartItems.length > 0 ?store.cartQuantity[store.cartQuantity.length-1] * store.cartItems[0]?.price:<span>0</span>}</h6>
-                  </div>
-                  <div className="col-lg-12  text-center">
-                    <Link to={"/single/"} className="btn btn-dark bottom-10">
-                       Checkout
-                    </Link>
-                  </div>
-                </div>
-              </div>
-            </div>
+            {store.cartItems.length > 0 ?
+            store.cartItems.map((item)=>
+            <CartCheckOut key={item.id}
+            price={item.price}
+            quantity={item.quantity}
+            id={item.id}
+            />):<span></span>} 
+          
           </div>
         </div>
       </div>
