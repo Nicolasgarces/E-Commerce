@@ -2,7 +2,7 @@
 This module takes care of starting the API Server, Loading the DB and Adding the endpoints
 """
 from flask import Flask, request, jsonify, url_for, Blueprint, current_app
-from api.models import db, User, Address
+from api.models import db, User, Address, OrderCart
 from api.utils import generate_sitemap, APIException
 from flask_jwt_extended import jwt_required, create_access_token, JWTManager, get_jwt_identity
 
@@ -190,4 +190,16 @@ def add_car():
         "msg": "User added successfuly "
     }
     
+    return jsonify(response_body), 200
+
+@api.route("/user/orders", methods=["GET"])
+@jwt_required()
+def get_orders():
+    current_user = get_jwt_identity()
+    user = User.query.filter_by(email=current_user).first()
+    userOrders = OrderCart.query.filter_by(user_id=user.id).all()
+    response_body = {
+        "orders": userOrders
+    }
+
     return jsonify(response_body), 200
