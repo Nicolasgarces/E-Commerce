@@ -9,6 +9,10 @@ export const Single = props => {
   const { store, actions } = useContext(Context);
   console.log(store.item);
   console.log(store.cartItems);
+  const [quantity, setQuantity] = useState("")
+  // const handleAddtoCart = () =>{
+  //   actions.onAdd(store.item)
+  // }
   // const [cartItems, setCartItems]= useState([])
   // console.log(cartItems);
   // const product = store.item
@@ -97,11 +101,11 @@ export const Single = props => {
                 title="Untis"
                 aria-label="Example text with button addon"
                 aria-describedby="button-addon1"
-                onChange={(e) => actions.getQuantity(e.target.value)}
+                onChange={(e) => setQuantity(e.target.value)}
               ></input>
             </div>
             <div className="add-to-cart">
-              <button className="btn btn-dark" onClick={()=>actions.onAdd(store.item)}>Add to cart</button>
+              <button className="btn btn-dark" onClick={()=>actions.onAdd(store.item, quantity)}>Add to cart</button>
             </div>
             <span></span>
           </div>

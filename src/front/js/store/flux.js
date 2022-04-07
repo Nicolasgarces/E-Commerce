@@ -101,17 +101,24 @@ const getState = ({ getStore, getActions, setStore }) => {
             	.then(json=>setStore({item: json}))
 			},
 
-			onAdd:(product)=>{
-				setStore({cartItems: getStore().cartItems.concat(product)})
+			onAdd:(product,quantity)=>{
+				let {id, title, price, image} = product
+				const exist = getStore().cartItems.find(item => item.id === product.id)
+				if(exist) {
+					setStore(getStore().cartItems.map(item => item.id === product.id) ? {...exist, quantity: exist.quantity + 1} : item)
+				} else {
+					const newItem = {id, title, price, quantity, image}
+					setStore({cartItems: getStore().cartItems.concat(newItem)})
+				}
 			  },
 
 			getQuantity:(number) => {
 				setStore({cartQuantity: getStore().cartQuantity.concat(number)})
 			},
 
-			deleteCart:(i)=>{
+			deleteCart:(id)=>{
 				setStore({cartItems: getStore().cartItems.filter(
-				  (item,index) => index !== i)})
+				  (item,index) => index !== id)})
 			  },
 
 			changeColor: (index, color) => {

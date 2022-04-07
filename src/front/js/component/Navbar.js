@@ -5,6 +5,7 @@ import { Context } from "../store/appContext";
 import { Redirect } from "react-router-dom";
 import { Single } from "../pages/single";
 import "../../styles/nav.css";
+import {Cartitem} from "./cartItem"
 
 console.log("prueba", process.env.TEST);
 
@@ -15,6 +16,7 @@ export const Navbar = () => {
   console.log(store.cartItems);
   console.log(store.cartQuantity);
   console.log(store.cartQuantity.length);
+  console.log(store.item.id);
   console.log(store.cartQuantity[store.cartQuantity.length-1]);
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -159,46 +161,18 @@ export const Navbar = () => {
                 aria-label="Close"
               ></button>
             </div>
-            <div className="offcanvas-body">
-              <div className=" mb-3" style={{ maxWidth: "540px" }}>
-                <div className="row g-0">
-                  <div className="col-md-4">
-                    <img
-                      src={store.cartItems[0]?.image}
-                      className="img-fluid rounded-start"
-                      alt="..."
-                    />
-                  </div>
-                  <div className="col-md-8">
-                    <div className="row card-body">
-                      <div className="col-lg-6">
-                        <h5 className="card-title">Title: {store.cartItems[0]?.title}</h5>
-                      </div>
-                      <div className="col-lg-6 d-flex justify-content-end">
-                          <i className="bi bi-trash"></i>
-                      </div>
-                      {/* <div className="col-lg-6">
-                        <p className="card-text text-muted">Size:</p>
-                      </div> */}
-                      {/* <div className="col-lg-6">
-                        <p className="card-text text-muted d-flex justify-content-end">S</p>
-                      </div> */}
-                      <div className="col-lg-6 p-2 bd-highlight">
-                        <p className="card-text">
-                          <small className="text-muted">Amount: {store.cartQuantity[store.cartQuantity.length-1]}</small>
-                        </p>
-                      </div>
-                      <div className="col-lg-6 d-flex justify-content-end p-2 bd-highlight">
-                        <p className="card-text">
-                          <small className="text-muted">$ {store.cartQuantity[store.cartQuantity.length-1] * store.cartItems[0]?.price}</small>
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+            {/* Cart Item */}
+            {store.cartItems.length > 0 ? 
+            store.cartItems.map((item)=>
+            <Cartitem key={item.id}
+            title={item.title}
+            image={item.image}
+            price={item.price}
+            quantity={item.quantity}
+            />): <span> Cart is Empty</span>}
 
+              {/* Cart Price */}
+              
             <div className="offcanvas-body d-flex align-items-end">
               <div className="mb-3" style={{ maxWidth: "540px" }}>
                 <div className="row g-0">
@@ -206,20 +180,20 @@ export const Navbar = () => {
                     <p className="card-title text-muted">Subtotal</p>
                   </div>
                   <div className="col-lg-6 d-flex justify-content-end">
-                    <p className="card-title text-muted">$ {store.cartQuantity[store.cartQuantity.length-1] * store.cartItems[0]?.price}</p>
+                    <p className="card-title text-muted">$ {store.cartItems.length > 0 ?store.cartQuantity[store.cartQuantity.length-1] * store.cartItems[0]?.price:<span>0</span>}</p>
                   </div>
 
-                  <div className="col-lg-6">
+                  {/* <div className="col-lg-6">
                     <p className="card-title text-muted">Shipping</p>
                   </div>
                   <div className="col-lg-6 d-flex justify-content-end">
                     <p className="card-title text-muted">$000.000</p>
-                  </div>
+                  </div> */}
                   <div className="col-lg-6">
                     <h6 className="card-title">Total</h6>
                   </div>
                   <div className="col-lg-6 d-flex justify-content-end">
-                    <h6 className="card-title">$ {store.cartQuantity[store.cartQuantity.length-1] * store.cartItems[0]?.price}</h6>
+                    <h6 className="card-title">$ {store.cartItems.length > 0 ?store.cartQuantity[store.cartQuantity.length-1] * store.cartItems[0]?.price:<span>0</span>}</h6>
                   </div>
                   <div className="col-lg-12  text-center">
                     <Link to={"/single/"} className="btn btn-dark bottom-10">
