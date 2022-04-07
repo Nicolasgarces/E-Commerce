@@ -24,7 +24,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			cartItems: [],
 			cartQuantity: [],
 			infoProfile:{},
-			infoAddress:{},
+			infoAddress:{}
 		},
 		actions: {
 			// Use getActions to call a function within a fuction
@@ -110,13 +110,19 @@ const getState = ({ getStore, getActions, setStore }) => {
 			onAdd:(product,quantity)=>{
 				let {id, title, price, image} = product
 				const exist = getStore().cartItems.find(item => item.id === product.id)
-				if(exist) {
-					setStore(getStore().cartItems.map(item => item.id === product.id) ? {...exist, quantity: exist.quantity + 1} : item)
-				} else {
+				console.log(exist);
+				// if(exist != undefined) {
+				// 	let bool =	getStore().cartItems.some((el)=>el.title === exist.title);
+				// 	setStore({cartItems: bool ? {...exist, quantity: exist.quantity + 1}: console.log('funciona')})
+				// 	console.log(exist.title);
+				// } else {
+				// 	const newItem = {id, title, price, quantity, image}
+				// 	setStore({cartItems: getStore().cartItems.concat(newItem)})
+				// }
+				if(exist === undefined) {
 					const newItem = {id, title, price, quantity, image}
 					setStore({cartItems: getStore().cartItems.concat(newItem)})
-				}
-			  },
+			  }},
 
 			getQuantity:(number) => {
 				setStore({cartQuantity: getStore().cartQuantity.concat(number)})
