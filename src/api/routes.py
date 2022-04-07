@@ -190,19 +190,47 @@ def get_orders():
 
 @api.route("/product/feed", methods=["GET"])
 def feed_products():
-    respWomen = requests.get("https://fakestoreapi.com/products/category/women's%20clothing").json()
-    respMen = requests.get("https://fakestoreapi.com/products/category/men's%20clothing").json()
+    # respWomen = requests.get("https://fakestoreapi.com/products/category/women's%20clothing").json()
+    resp = requests.get("https://fakestoreapi.com/products/category/men's%20clothing").json()
     products = []
-    products.append(respWomen)
-    products.append(respMen)
-    print(products)
-    # for product in resp:
-    #     newProduct = Product(productID= product["id"],title= product["title"], price= product["price"], description= product["description"],category= product["category"],image= product["image"])
-    #     db.session.add(newProduct)
-    #     db.session.commit()
+    # products.append(respWomen)
+    # products.append(respMen)
+    # print(products)
+    for product in resp:
+        newProduct = Product(productID= product["id"],title= product["title"], price= product["price"], description= product["description"],category= product["category"],image= product["image"])
+        db.session.add(newProduct)
+        db.session.commit()
     
     response_body = {
         "msg": "ok"
     }
 
     return jsonify(response_body), 200
+
+@api.route("/product/women", methods=["GET"])
+def get_women_products():
+    womenProducts = Product.query.filter_by(category="women's clothing").all()
+    products = []
+
+    for product in womenProducts:
+        products.append(product.serialize())
+
+    response_body = {
+        "msg": "ok"
+    }
+
+    return jsonify(products), 200
+
+@api.route("/product/men", methods=["GET"])
+def get_men_products():
+    womenProducts = Product.query.filter_by(category="men's clothing").all()
+    products = []
+
+    for product in womenProducts:
+        products.append(product.serialize())
+
+    response_body = {
+        "msg": "ok"
+    }
+
+    return jsonify(products), 200
