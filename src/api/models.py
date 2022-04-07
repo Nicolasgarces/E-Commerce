@@ -48,7 +48,7 @@ class Product(db.Model):
     productID = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(120), unique=False, nullable=True)
     price = db.Column(db.Integer,unique=False, nullable=True)
-    description = db.Column(db.String(256), unique=True, nullable=False)
+    description = db.Column(db.Text, unique=True, nullable=False)
     category = db.Column(db.String(256), unique=False, nullable=False)
     image = db.Column(db.String(256), unique=False, nullable=False)
     orders = db.relationship('OrderCart', backref='order', lazy=True)

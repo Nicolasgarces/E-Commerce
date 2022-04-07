@@ -2,9 +2,10 @@
 This module takes care of starting the API Server, Loading the DB and Adding the endpoints
 """
 from flask import Flask, request, jsonify, url_for, Blueprint, current_app
-from api.models import db, User, Address, OrderCart
+from api.models import db, User, Address, OrderCart, Product
 from api.utils import generate_sitemap, APIException
 from flask_jwt_extended import jwt_required, create_access_token, JWTManager, get_jwt_identity
+import requests
 
 api = Blueprint('api', __name__)
 
@@ -183,6 +184,25 @@ def get_orders():
     userOrders = OrderCart.query.filter_by(user_id=user.id).all()
     response_body = {
         "orders": userOrders
+    }
+
+    return jsonify(response_body), 200
+
+@api.route("/product/feed", methods=["GET"])
+def feed_products():
+    respWomen = requests.get("https://fakestoreapi.com/products/category/women's%20clothing").json()
+    respMen = requests.get("https://fakestoreapi.com/products/category/men's%20clothing").json()
+    products = []
+    products.append(respWomen)
+    products.append(respMen)
+    print(products)
+    # for product in resp:
+    #     newProduct = Product(productID= product["id"],title= product["title"], price= product["price"], description= product["description"],category= product["category"],image= product["image"])
+    #     db.session.add(newProduct)
+    #     db.session.commit()
+    
+    response_body = {
+        "msg": "ok"
     }
 
     return jsonify(response_body), 200
