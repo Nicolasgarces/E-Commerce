@@ -28,5 +28,6 @@
 }
 
 .content{  
-  min-height: calc(100vh - 240px - 75px);
+  min-height: calc(100vh - 56px - 75px);
+  /* min-height: calc(100vh - 148px); */
 }
