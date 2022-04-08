@@ -5,6 +5,7 @@ import "../../styles/categories.css";
 
 export const CatMen = () => {
   const { store, actions } = useContext(Context);
+  console.log(store.catMen);
   return (
     <div className="container-fluid">
     <div className="row flex-nowrap">
@@ -60,10 +61,10 @@ export const CatMen = () => {
             return (
         <div className="col-sm-6 col-md-4 col-lg-3 py-4 d-inline-flex" style={{width: "300px"}} key={i}>
               <MenProducts
-                key={i}
                 title={item.title}
                 price={item.price}
                 image={item.image}
+                id={item.id}
               />
               </div>
             );

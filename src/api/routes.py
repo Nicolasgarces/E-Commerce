@@ -69,9 +69,25 @@ def get_profile():
 
     return jsonify(logged_in_as=current_user), 400
 
+# Creación y verificacion de usuario
 @api.route('/user', methods=["POST"])
 def create_account():
     body = request.get_json()
+
+    print(body)
+
+    passw = current_app.bcrypt.generate_password_hash(body["password"]).decode('utf-8')
+    
+    check_email = User.query.filter_by(email = body["email"]).first()
+
+    print(check_email)
+
+    if check_email:
+
+        return jsonify({
+            "msg": "Email already exists"
+        }), 200
+
     newUserId = insertUser(body)
     userAddress = insertAddress(newUserId, body["address"])
     print(userAddress)
@@ -80,7 +96,7 @@ def create_account():
         "msg": "User added successfuly "
     }
     
-    return jsonify(response_body), 200
+    return jsonify(response_body), 201
 
 def insertUser(body):
     passw = current_app.bcrypt.generate_password_hash(body["password"]).decode('utf-8')
@@ -109,6 +125,7 @@ def update_user():
         "msg": "User modified successfuly "
     }
     
+    # return jsonify(response_body), 201
     return jsonify(response_body), 200
     
 #Agregar Direccion de usuario
