@@ -183,19 +183,14 @@ def add_car():
     body = request.get_json()
     current_user = get_jwt_identity()
     user = User.query.filter_by(email=current_user).first()
-    # print(body)
+    print(body)
     
-    
-    
-
-    print(body["cartItems"])
+    #print(body["cartItems"])
     for item in body["cartItems"]:
         newCart= OrderCart(quantity= item["quantity"],TotalMount = body["TotalMount"],productID = item["id"],user_id = user.id)
         db.session.add(newCart)
         db.session.commit()
         
-
-
     response_body = {
         "msg": "Order added successfuly "
     }
@@ -207,12 +202,14 @@ def add_car():
 def get_orders():
     current_user = get_jwt_identity()
     user = User.query.filter_by(email=current_user).first()
-    userOrders = OrderCart.query.filter_by(user_id=user.id).all()
-    response_body = {
-        "orders": userOrders
-    }
+    orders = OrderCart.query.filter_by(user_id=user.id).all()
+    allUserOrders=[]
+    for order in orders:
+        allUserOrders.append(order.serialize())
+    print(allUserOrders)
+    
 
-    return jsonify(response_body), 200
+    return jsonify(allUserOrders), 200
 
 @api.route("/product/feed", methods=["GET"])
 def feed_products():
