@@ -190,14 +190,17 @@ def get_orders():
 
 @api.route("/product/feed", methods=["GET"])
 def feed_products():
-    # respWomen = requests.get("https://fakestoreapi.com/products/category/women's%20clothing").json()
-    resp = requests.get("https://fakestoreapi.com/products/category/men's%20clothing").json()
+    respWomen = requests.get("https://fakestoreapi.com/products/category/women's%20clothing").json()
+    respMen = requests.get("https://fakestoreapi.com/products/category/men's%20clothing").json()
     products = []
-    # products.append(respWomen)
-    # products.append(respMen)
-    # print(products)
-    for product in resp:
-        newProduct = Product(productID= product["id"],title= product["title"], price= product["price"], description= product["description"],category= product["category"],image= product["image"])
+    for prod in respWomen:
+        products.append(prod)
+
+    for prodMen in respMen:
+        products.append(prodMen)
+
+    for product in products:
+        newProduct = Product(id= product["id"],title= product["title"], price= product["price"], description= product["description"],category= product["category"],image= product["image"])
         db.session.add(newProduct)
         db.session.commit()
     
@@ -215,10 +218,6 @@ def get_women_products():
     for product in womenProducts:
         products.append(product.serialize())
 
-    response_body = {
-        "msg": "ok"
-    }
-
     return jsonify(products), 200
 
 @api.route("/product/men", methods=["GET"])
@@ -228,9 +227,5 @@ def get_men_products():
 
     for product in womenProducts:
         products.append(product.serialize())
-
-    response_body = {
-        "msg": "ok"
-    }
 
     return jsonify(products), 200
