@@ -111,18 +111,17 @@ const getState = ({ getStore, getActions, setStore }) => {
 				let {id, title, price, image} = product
 				const exist = getStore().cartItems.find(item => item.id === product.id)
 				console.log(exist);
-				// if(exist != undefined) {
-				// 	let bool =	getStore().cartItems.some((el)=>el.title === exist.title);
-				// 	setStore({cartItems: bool ? {...exist, quantity: exist.quantity + 1}: console.log('funciona')})
-				// 	console.log(exist.title);
-				// } else {
-				// 	const newItem = {id, title, price, quantity, image}
-				// 	setStore({cartItems: getStore().cartItems.concat(newItem)})
-				// }
-				if(exist === undefined) {
+				if(exist != undefined) {
+					// seteamos en el array "cartItems" la actualización de la cantida
+					//para eso mapeamos el array y si los id del item coinciden actualizamos la cantidad
+					//sino devolvemos el item normal (parseo por los datos estan en string hay que resolver eso)
+					setStore({cartItems: getStore().cartItems.map((item)=>item.id === exist.id ? {...exist, quantity: parseInt(item.quantity)+parseInt(quantity)} : item)})
+				}
+				else { //si no se ha encontrado un producto existete en "cartItems" se agrega
 					const newItem = {id, title, price, quantity, image}
 					setStore({cartItems: getStore().cartItems.concat(newItem)})
-			  }},
+			  		}
+			},
 
 			deleteCart:(id)=>{
 				const removedItem = getStore().cartItems.find(item => item.id === id)
