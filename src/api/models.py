@@ -25,7 +25,7 @@ class OrderCart(db.Model):
     orderCartID = db.Column(db.Integer, primary_key=True)
     quantity = db.Column(db.Integer, nullable=False)
     TotalMount = db.Column(db.Integer,unique=False, nullable=True)
-    productID = db.Column(db.Integer, db.ForeignKey('product.productID'),
+    productID = db.Column(db.Integer, db.ForeignKey('product.id'),
         nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'),
         nullable=False)
@@ -45,21 +45,21 @@ class OrderCart(db.Model):
         }
 
 class Product(db.Model):
-    productID = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(120), unique=False, nullable=True)
     price = db.Column(db.Integer,unique=False, nullable=True)
-    description = db.Column(db.String(256), unique=True, nullable=False)
+    description = db.Column(db.Text, unique=True, nullable=False)
     category = db.Column(db.String(256), unique=False, nullable=False)
     image = db.Column(db.String(256), unique=False, nullable=False)
     orders = db.relationship('OrderCart', backref='order', lazy=True)
     
 
     def __repr__(self):
-        return '<Product %r>' % self.productID
+        return '<Product %r>' % self.id
 
     def serialize(self):
         return {
-            "productID": self.productID,
+            "id": self.id,
             "title": self.title,
             "price": self.price,
             "description": self.description,
