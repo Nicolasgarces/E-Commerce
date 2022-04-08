@@ -8,7 +8,7 @@ export const CartCheckOut = (props) => {
     const { store, actions } = useContext(Context);
     return (
         <div className="offcanvas-body d-flex align-items-end">
-        <div className="mb-3" style={{ maxWidth: "540px" }}>
+        {/* <div className="mb-3" style={{ maxWidth: "540px" }}>
           <div className="row g-0">
             <div className="col-lg-6">
               <p className="card-title text-muted">Subtotal</p>
@@ -17,12 +17,12 @@ export const CartCheckOut = (props) => {
               <p className="card-title text-muted">$ {props.quantity * props.price}</p>
             </div>
 
-            {/* <div className="col-lg-6">
+            <div className="col-lg-6">
               <p className="card-title text-muted">Shipping</p>
             </div>
             <div className="col-lg-6 d-flex justify-content-end">
               <p className="card-title text-muted">$000.000</p>
-            </div> */}
+            </div>
             <div className="col-lg-6">
               <h6 className="card-title">Total</h6>
             </div>
@@ -35,7 +35,7 @@ export const CartCheckOut = (props) => {
               </Link>
             </div>
           </div>
-        </div>
+        </div> */}
       </div>
     )
 }

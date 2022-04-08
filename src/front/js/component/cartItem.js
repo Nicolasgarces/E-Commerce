@@ -6,7 +6,7 @@ import { Context } from "../store/appContext";
 export const Cartitem = (props) => {
     const { store, actions } = useContext(Context);
     return (
-        <div className="offcanvas-body">
+        <ul className="offcanvas-body">
               <div className=" mb-3" style={{ maxWidth: "540px" }}>
                 <div className="row g-0">
                   <div className="col-md-4">
@@ -44,6 +44,6 @@ export const Cartitem = (props) => {
                   </div>
                 </div>
               </div>
-            </div>
+            </ul>
     )
 }
