@@ -183,12 +183,18 @@ def add_car():
     body = request.get_json()
     current_user = get_jwt_identity()
     user = User.query.filter_by(email=current_user).first()
-    print(body)
+    # print(body)
     
     
-    newCart= OrderCart(quantity= body["quantity"],TotalMount = body["TotalMount"],productID = body["productID"],user_id = user.id)
-    db.session.add(newCart)
-    db.session.commit()
+    
+
+    print(body["cartItems"])
+    for item in body["cartItems"]:
+        newCart= OrderCart(quantity= item["quantity"],TotalMount = body["TotalMount"],productID = item["id"],user_id = user.id)
+        db.session.add(newCart)
+        db.session.commit()
+        
+
 
     response_body = {
         "msg": "Order added successfuly "
