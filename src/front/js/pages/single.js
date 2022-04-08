@@ -3,6 +3,8 @@ import PropTypes from "prop-types";
 import { Link, useParams } from "react-router-dom";
 import { Context } from "../store/appContext";
 import Navbar from "../component/Navbar";
+import { MenSugggestedItems } from "../component/MenSugggestedItems";
+import { WomenSugggestedItems } from "../component/WomenSugggestedItems";
 
 export const Single = props => {
 	const params = useParams();
@@ -167,194 +169,25 @@ export const Single = props => {
     </button>
   </div>
   {/* <!-- Inner --> */}
-  <div className="carousel-inner py-4">
-    {/* <!-- Single item 1--> */}
-    <div className="carousel-item active">
-      <div className="container">
-        <div className="row">
-          <div className="col-lg-4">
-            <div className="card">
-              <img
-                src="https://mdbcdn.b-cdn.net/img/new/standard/nature/181.webp"
-                className="card-img-top"
-                alt="Waterfall"
-              />
-              <div className="card-body">
-                <h5 className="card-title">Title</h5>
-                <p className="card-text">
-                  Some quick example text to build on the card title and make up the bulk
-                  of the card's content.
-                </p>
-                <a href="#!" className="btn btn-primary">Button</a>
-              </div>
-            </div>
-          </div>
-
-          <div className="col-lg-4 d-none d-lg-block">
-            <div className="card">
-              <img
-                src="https://mdbcdn.b-cdn.net/img/new/standard/nature/182.webp"
-                className="card-img-top"
-                alt="Sunset Over the Sea"
-              />
-              <div className="card-body">
-                <h5 className="card-title">Card title</h5>
-                <p className="card-text">
-                  Some quick example text to build on the card title and make up the bulk
-                  of the card's content.
-                </p>
-                <a href="#!" className="btn btn-primary">Button</a>
-              </div>
-            </div>
-          </div>
-
-          <div className="col-lg-4 d-none d-lg-block">
-            <div className="card">
-              <img
-                src="https://mdbcdn.b-cdn.net/img/new/standard/nature/183.webp"
-                className="card-img-top"
-                alt="Sunset over the Sea"
-              />
-              <div className="card-body">
-                <h5 className="card-title">Card title</h5>
-                <p className="card-text">
-                  Some quick example text to build on the card title and make up the bulk
-                  of the card's content.
-                </p>
-                <a href="#!" className="btn btn-primary">Button</a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    {/* <!-- Single item 2 --> */}
-    <div className="carousel-item">
-      <div className="container">
-        <div className="row">
-          <div className="col-lg-4 col-md-12">
-            <div className="card">
-              <img
-                src="https://mdbcdn.b-cdn.net/img/new/standard/nature/184.webp"
-                className="card-img-top"
-                alt="Fissure in Sandstone"
-              />
-              <div className="card-body">
-                <h5 className="card-title">Card title</h5>
-                <p className="card-text">
-                  Some quick example text to build on the card title and make up the bulk
-                  of the card's content.
-                </p>
-                <a href="#!" className="btn btn-primary">Button</a>
-              </div>
-            </div>
-          </div>
-
-          <div className="col-lg-4 d-none d-lg-block">
-            <div className="card">
-              <img
-                src="https://mdbcdn.b-cdn.net/img/new/standard/nature/185.webp"
-                className="card-img-top"
-                alt="Storm Clouds"
-              />
-              <div className="card-body">
-                <h5 className="card-title">Card title</h5>
-                <p className="card-text">
-                  Some quick example text to build on the card title and make up the bulk
-                  of the card's content.
-                </p>
-                <a href="#!" className="btn btn-primary">Button</a>
-              </div>
-            </div>
-          </div>
-
-          <div className="col-lg-4 d-none d-lg-block">
-            <div className="card">
-              <img
-                src="https://mdbcdn.b-cdn.net/img/new/standard/nature/186.webp"
-                className="card-img-top"
-                alt="Hot Air Balloons"
-              />
-              <div className="card-body">
-                <h5 className="card-title">Card title</h5>
-                <p className="card-text">
-                  Some quick example text to build on the card title and make up the bulk
-                  of the card's content.
-                </p>
-                <a href="#!" className="btn btn-primary">Button</a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    {/* <!-- Single item 3 --> */}
-    <div className="carousel-item">
-      <div className="container">
-        <div className="row">
-          <div className="col-lg-4 col-md-12 mb-4 mb-lg-0">
-            <div className="card">
-              <img
-                src="https://mdbcdn.b-cdn.net/img/new/standard/nature/187.webp"
-                className="card-img-top"
-                alt="Peaks Against the Starry Sky"
-              />
-              <div className="card-body">
-                <h5 className="card-title">Card title</h5>
-                <p className="card-text">
-                  Some quick example text to build on the card title and make up the bulk
-                  of the card's content.
-                </p>
-                <a href="#!" className="btn btn-primary">Button</a>
-              </div>
-            </div>
-          </div>
-
-          <div className="col-lg-4 mb-4 mb-lg-0 d-none d-lg-block">
-            <div className="card">
-              <img
-                src="https://mdbcdn.b-cdn.net/img/new/standard/nature/188.webp"
-                className="card-img-top"
-                alt="Bridge Over Water"
-              />
-              <div className="card-body">
-                <h5 className="card-title">Card title</h5>
-                <p className="card-text">
-                  Some quick example text to build on the card title and make up the bulk
-                  of the card's content.
-                </p>
-                <a href="#!" className="btn btn-primary">Button</a>
-              </div>
-            </div>
-          </div>
-
-          <div className="col-lg-4 mb-4 mb-lg-0 d-none d-lg-block">
-            <div className="card">
-              <img
-                src="https://mdbcdn.b-cdn.net/img/new/standard/nature/189.webp"
-                className="card-img-top"
-                alt="Purbeck Heritage Coast"
-              />
-              <div className="card-body">
-                <h5 className="card-title">Card title</h5>
-                <p className="card-text">
-                  Some quick example text to build on the card title and make up the bulk
-                  of the card's content.
-                </p>
-                <a href="#!" className="btn btn-primary">Button</a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+      {store.item.id < 5 ? (
+        store.catMen.map((item)=> (
+        <MenSugggestedItems key={item.id}
+        title={item.title}
+        price={item.price}
+        image={item.image}
+        id={item.id}
+        />))
+      ):store.catWomen.map((item)=> (
+        <WomenSugggestedItems key={item.id}
+        title={item.title}
+        price={item.price}
+        image={item.image}
+        id={item.id}
+        />
+      ))
+    }
   </div>
-  {/* <!-- Inner --> */}
 </div>
-{/* <!-- Carousel wrapper --> */}
-    </div>
   );
 };
 
