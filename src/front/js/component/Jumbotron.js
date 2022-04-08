@@ -8,7 +8,7 @@ const Jumbotron = () => {
   return (
     <div className="container-md">
       <div className="row">
-        <div className="img-0 col position-relative">
+        <div className="img-0 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 position-relative">
           {" "}
           {/* img man */}
           <Link to={`/catmen/`}>
@@ -26,7 +26,7 @@ const Jumbotron = () => {
           </Link>
         </div>
 
-        <div className="img-1 col position-relative">
+        <div className="img-1 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 position-relative">
           {" "}
           {/* img woman */}
           <Link to={`/catwomen/`}>
@@ -48,7 +48,7 @@ const Jumbotron = () => {
       <div className="row ">
         {" "}
         {/* img man */}
-        <div className="img-2 col-3  text-center">
+        <div className="img-2 col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6 text-center">
           <Link to={`/catmen/`}>
             <img
               src="https://xcdn.next.co.uk/common/Items/Default/Default/Publications/3_4Ratio/G28/shotview-366x488/2424/T44-646s.jpg"
@@ -58,7 +58,7 @@ const Jumbotron = () => {
           </Link>
         </div>
 
-        <div className="img-3 col-3 text-center">
+        <div className="img-3 col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6 text-center">
           {" "}
           {/* img man */}
           <Link to={`/catmen/`}>
@@ -69,7 +69,7 @@ const Jumbotron = () => {
           </Link>
         </div>
 
-        <div className="img-4 col-3  text-center">
+        <div className="img-4 col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6 text-center">
           {" "}
           {/* img woman */}
           <Link to={`/catwomen/`}>
@@ -81,7 +81,7 @@ const Jumbotron = () => {
           </Link>
         </div>
 
-        <div className="img-5 col-3 text-center">
+        <div className="img-5 col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6 text-center">
           {" "}
           {/* img woman */}
           <Link to={`/catwomen/`}>

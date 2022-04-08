@@ -54,7 +54,7 @@ export const CatMen = () => {
         </div>
       </div>
 
-      <div className="row container mx-auto">
+      <div className="col-lg-10 container mx-auto">
       {/* <h1 className='text-center py-2'>MEN CLOTHES</h1> */}
           {store.catMen.map((item, i) => {
             return (

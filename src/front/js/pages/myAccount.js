@@ -43,20 +43,22 @@ export const MyAccount = () => {
           </div>
         </div>
 
-        <div className="container mx-auto">
+        <div className=" col-lg-10 container mx-auto">
           <div className=" row jumbotron" style={{width: "100%"}}>
-            <div className="col-lg-12"><h1 className="display-4">My Account</h1></div>
-            <h4>Account Information</h4>
+            <div className="col-lg-12"><h1 className="display-4 text-center">My Account</h1></div>
+            <h4 className=" text-center">Account Information</h4>
             <hr className="my-4" />
-            <div className="col-lg-12"><h5>Contact Information</h5></div>
-            <div className="col-lg-8"><h5>Name:<span className="lead">{" " + store.infoProfile.name}</span></h5></div>
-            <div className="col-lg-4"><span onClick={() => actions.editProfile(true, store.infoProfile)}>Edit</span></div>
-            <div className="col-lg-8"><h5>Lastname:<span className="lead">{" " + store.infoProfile.lastName}</span></h5></div>
-            <div className="col-lg-4"><span onClick={() => actions.editProfile(false, store.infoProfile)}>Edit</span></div>
+          
+            <div className="col-lg-12"><h5 className="container ">Contact Information</h5></div>
+            <div className="col-lg-8"><h5 className="container">Name:<span className="lead">{" " + store.infoProfile.name}</span></h5></div>
+            <div className="col-lg-4" style={{color: "orange"}}><span onClick={() => actions.editProfile(true, store.infoProfile)}>Edit</span></div>
+            <div className="col-lg-8"><h5 className="container">Lastname:<span className="lead">{" " + store.infoProfile.lastName}</span></h5></div>
+            <div className="col-lg-4" style={{color: "orange"}}><span onClick={() => actions.editProfile(false, store.infoProfile)}>Edit</span></div>
             <hr className="my-4" />
-            <div className="col-lg-12"><h5>Shipping Address</h5></div>
-            <div className="col-lg-8"><h5>User Address: :<span className="lead">{" " + store.infoAddress.address}</span></h5></div>
-            <div className="col-lg-4"><span className="text-start" onClick={() => actions.updateAddress()}>Edit</span></div>
+            <div className="col-lg-12"><h5 className="container" >Shipping Address</h5></div>
+            <div className="col-lg-8"><h5 className="container">User Address:<span className="lead">{" " + store.infoAddress.address}</span></h5></div>
+            <div className="col-lg-4" style={{color: "orange"}}><span className="text-start" onClick={() => actions.updateAddress()}>Edit</span></div>
+
           </div>
         </div>
       </div>
