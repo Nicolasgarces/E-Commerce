@@ -2,9 +2,10 @@
 This module takes care of starting the API Server, Loading the DB and Adding the endpoints
 """
 from flask import Flask, request, jsonify, url_for, Blueprint, current_app
-from api.models import db, User, Address
+from api.models import db, User, Address, OrderCart, Product
 from api.utils import generate_sitemap, APIException
 from flask_jwt_extended import jwt_required, create_access_token, JWTManager, get_jwt_identity
+import requests
 
 api = Blueprint('api', __name__)
 
@@ -68,9 +69,25 @@ def get_profile():
 
     return jsonify(logged_in_as=current_user), 400
 
+# Creación y verificacion de usuario
 @api.route('/user', methods=["POST"])
 def create_account():
     body = request.get_json()
+
+    print(body)
+
+    passw = current_app.bcrypt.generate_password_hash(body["password"]).decode('utf-8')
+    
+    check_email = User.query.filter_by(email = body["email"]).first()
+
+    print(check_email)
+
+    if check_email:
+
+        return jsonify({
+            "msg": "Email already exists"
+        }), 200
+
     newUserId = insertUser(body)
     userAddress = insertAddress(newUserId, body["address"])
     print(userAddress)
@@ -79,7 +96,7 @@ def create_account():
         "msg": "User added successfuly "
     }
     
-    return jsonify(response_body), 200
+    return jsonify(response_body), 201
 
 def insertUser(body):
     passw = current_app.bcrypt.generate_password_hash(body["password"]).decode('utf-8')
@@ -108,6 +125,7 @@ def update_user():
         "msg": "User modified successfuly "
     }
     
+    # return jsonify(response_body), 201
     return jsonify(response_body), 200
     
 #Agregar Direccion de usuario
@@ -160,17 +178,80 @@ def get_address():
         return jsonify(response_body), 200
 
 @api.route('/car', methods=["POST"])
+@jwt_required()
 def add_car():
     body = request.get_json()
-    print(body)
-    # passw = current_app.bcrypt.generate_password_hash(body["password"]).decode('utf-8')
+    current_user = get_jwt_identity()
+    user = User.query.filter_by(email=current_user).first()
+    # print(body)
     
-    # newUser = User(email= body["email"],name = body["name"], password = passw, lastName = body["lastName"])
-    # db.session.add(newUser)
-    # db.session.commit()
+    
+    
+
+    print(body["cartItems"])
+    for item in body["cartItems"]:
+        newCart= OrderCart(quantity= item["quantity"],TotalMount = body["TotalMount"],productID = item["id"],user_id = user.id)
+        db.session.add(newCart)
+        db.session.commit()
+        
+
 
     response_body = {
-        "msg": "User added successfuly "
+        "msg": "Order added successfuly "
     }
     
     return jsonify(response_body), 200
+
+@api.route("/user/orders", methods=["GET"])
+@jwt_required()
+def get_orders():
+    current_user = get_jwt_identity()
+    user = User.query.filter_by(email=current_user).first()
+    userOrders = OrderCart.query.filter_by(user_id=user.id).all()
+    response_body = {
+        "orders": userOrders
+    }
+
+    return jsonify(response_body), 200
+
+@api.route("/product/feed", methods=["GET"])
+def feed_products():
+    respWomen = requests.get("https://fakestoreapi.com/products/category/women's%20clothing").json()
+    respMen = requests.get("https://fakestoreapi.com/products/category/men's%20clothing").json()
+    products = []
+    for prod in respWomen:
+        products.append(prod)
+
+    for prodMen in respMen:
+        products.append(prodMen)
+
+    for product in products:
+        newProduct = Product(id= product["id"],title= product["title"], price= product["price"], description= product["description"],category= product["category"],image= product["image"])
+        db.session.add(newProduct)
+        db.session.commit()
+    
+    response_body = {
+        "msg": "ok"
+    }
+
+    return jsonify(response_body), 200
+
+@api.route("/product/women", methods=["GET"])
+def get_women_products():
+    womenProducts = Product.query.filter_by(category="women's clothing").all()
+    products = []
+
+    for product in womenProducts:
+        products.append(product.serialize())
+
+    return jsonify(products), 200
+
+@api.route("/product/men", methods=["GET"])
+def get_men_products():
+    womenProducts = Product.query.filter_by(category="men's clothing").all()
+    products = []
+
+    for product in womenProducts:
+        products.append(product.serialize())
+
+    return jsonify(products), 200

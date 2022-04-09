@@ -3,7 +3,11 @@ import { Link } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 import { Context } from "../store/appContext";
 import { Redirect } from "react-router-dom";
+import { Single } from "../pages/single";
 import "../../styles/nav.css";
+import {Cartitem} from "./cartItem"
+import { CartCheckOut } from "./cartCheckOut";
+import { element } from "prop-types";
 
 console.log("prueba", process.env.TEST);
 
@@ -11,6 +15,19 @@ export const Navbar = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const { store, actions } = useContext(Context);
+  console.log(store.cartItems);
+  console.log(store.cartQuantity);
+  console.log(store.cartQuantity.length);
+  console.log(store.item.id);
+  console.log(store.cartQuantity[store.cartQuantity.length-1]);
+
+    let sum = 0;
+    store.cartItems.forEach((item)=> {
+        let total = item.price * item.quantity;
+        sum += total;
+    })
+  console.log(sum);
+
   const handleSubmit = (e) => {
     e.preventDefault();
     actions.login(email, password);
@@ -88,52 +105,60 @@ export const Navbar = () => {
               id="dropdownLoginUsuario"
               data-bs-toggle="dropdown"
               aria-expanded="false"
-            >
-              <i className="bi bi-person-circle  loginIcon "></i>
-            </a>
-            <div
-              className="dropdown-menu loginContainer "
-              aria-labelledby="dropdownLoginUsuario"
-            >
-              <div className="d-flex justify-content-between d-grid gap-2">
-                <h3>Sign in</h3>
-                <a className=" text-right mt-2">Sign up</a>
-              </div>
+            ></a>
+              <a
+                type="button"
+                id="dropdownLoginUsuario"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                <i className="bi bi-person-circle  loginIcon "></i>
+              </a>
+              <div
+                className="dropdown-menu loginContainer "
+                aria-labelledby="dropdownLoginUsuario"
+              >
+                <div className="d-flex justify-content-between d-grid gap-2">
+                  <h3>Sign in</h3>
+                  <a className=" text-right mt-2" href="/createuser">
+                    Sign up
+                  </a>
+                </div>
 
-              <div className="form-floating form-group mt-3 ">
-                <input
-                  type="email"
-                  className="form-control"
-                  id="floatingInput"
-                  placeholder="name@example.com"
-                  onChange={(e) => setEmail(e.target.value)}
-                  value={email}
-                />
-                <label htmlFor="floatingInput">Email</label>
-              </div>
-              <div className="form-floating form-group mt-3">
-                <input
-                  type="password"
-                  className="form-control"
-                  id="floatingPassword"
-                  placeholder="Password"
-                  onChange={(e) => setPassword(e.target.value)}
-                  value={password}
-                />
-                <label htmlFor="floatingPassword">Password*</label>
-              </div>
+                <div className="form-floating form-group mt-3 ">
+                  <input
+                    type="email"
+                    className="form-control"
+                    id="floatingInput"
+                    placeholder="name@example.com"
+                    onChange={(e) => setEmail(e.target.value)}
+                    value={email}
+                  />
+                  <label htmlFor="floatingInput">Email</label>
+                </div>
+                <div className="form-floating form-group mt-3">
+                  <input
+                    type="password"
+                    className="form-control"
+                    id="floatingPassword"
+                    placeholder="Password"
+                    onChange={(e) => setPassword(e.target.value)}
+                    value={password}
+                  />
+                  <label htmlFor="floatingPassword">Password*</label>
+                </div>
 
-              <div className="invisible forgot-password text-right mt-2">
-                <Link to="#">You forgot,right?</Link>
+                <div className="invisible forgot-password text-right mt-2">
+                  <Link to="#">You forgot,right?</Link>
+                </div>
+                <div className="d-grid gap-2 mt-3">
+                  <button type="submit" className="btn btn-secondary">
+                    Login
+                  </button>
+                </div>
               </div>
-              <div className="d-grid gap-2 mt-3">
-                <button type="submit" className="btn btn-secondary">
-                  Login
-                </button>
-              </div>
-            </div>
-          </form>
-          } 
+            </form>
+          }
         </div>
 
         <div className="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-1 d-flex flex-column align-items-end justify-content-center">
@@ -146,7 +171,6 @@ export const Navbar = () => {
           >
             <i className="bi bi-cart-check-fill"></i>
           </button>
-
           <div
             className="offcanvas offcanvas-end"
             tabIndex="-1"
@@ -156,7 +180,9 @@ export const Navbar = () => {
             <div className="offcanvas-header ">
               <div className="row">
                 <div className="col-lg-12 ">
-                  <h5 className="text-center" id="offcanvasRightLabel">Shopping bag</h5>
+                  <h5 className="text-center" id="offcanvasRightLabel">
+                    Shopping bag
+                  </h5>
                 </div>
               </div>
               <button
@@ -166,46 +192,23 @@ export const Navbar = () => {
                 aria-label="Close"
               ></button>
             </div>
-            <div className="offcanvas-body">
-              <div className=" mb-3" style={{ maxWidth: "540px" }}>
-                <div className="row g-0">
-                  <div className="col-md-4">
-                    <img
-                      src="https://i.pinimg.com/564x/fc/bd/0b/fcbd0b732979c42803add1ce7f1d299b.jpg"
-                      className="img-fluid rounded-start"
-                      alt="..."
-                    />
-                  </div>
-                  <div className="col-md-8">
-                    <div className="row card-body">
-                      <div className="col-lg-6">
-                        <h5 className="card-title">Title</h5>
-                      </div>
-                      <div className="col-lg-6 d-flex justify-content-end">
-                        <i className="bi bi-trash"></i>
-                      </div>
-                      <div className="col-lg-6">
-                        <p className="card-text text-muted">Size:</p>
-                      </div>
-                      <div className="col-lg-6">
-                        <p className="card-text text-muted d-flex justify-content-end">S</p>
-                      </div>
-                      <div className="col-lg-6 p-2 bd-highlight">
-                        <p className="card-text">
-                          <small className="text-muted">Amount: 1</small>
-                        </p>
-                      </div>
-                      <div className="col-lg-6 d-flex justify-content-end p-2 bd-highlight">
-                        <p className="card-text">
-                          <small className="text-muted">$000.000</small>
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+            {/* Cart Item */}
+            {store.cartItems.length > 0 ? (
+              store.cartItems.map((item) => (
+                <Cartitem
+                  key={item.id}
+                  title={item.title}
+                  image={item.image}
+                  price={item.price}
+                  quantity={item.quantity}
+                  id={item.id}
+                />
+              ))
+            ) : (
+              <h5 className="text-center"> Cart is Empty</h5>
+            )}
 
+            {/* Cart Price */}
             <div className="offcanvas-body d-flex align-items-end">
               <div className="mb-3" style={{ maxWidth: "540px" }}>
                 <div className="row g-0">
@@ -213,24 +216,24 @@ export const Navbar = () => {
                     <p className="card-title text-muted">Subtotal</p>
                   </div>
                   <div className="col-lg-6 d-flex justify-content-end">
-                    <p className="card-title text-muted">$000.000</p>
+                    <p className="card-title text-muted">$ {sum} </p>
                   </div>
 
-                  <div className="col-lg-6">
-                    <p className="card-title text-muted">Shipping</p>
-                  </div>
-                  <div className="col-lg-6 d-flex justify-content-end">
-                    <p className="card-title text-muted">$000.000</p>
-                  </div>
+                  {/* <div className="col-lg-6">
+              <p className="card-title text-muted">Shipping</p>
+            </div>
+            <div className="col-lg-6 d-flex justify-content-end">
+              <p className="card-title text-muted">$000.000</p>
+            </div> */}
                   <div className="col-lg-6">
                     <h6 className="card-title">Total</h6>
                   </div>
                   <div className="col-lg-6 d-flex justify-content-end">
-                    <h6 className="card-title">$000.000</h6>
+                    <h6 className="card-title">$ {sum} </h6>
                   </div>
                   <div className="col-lg-12  text-center">
                     <Link to={"/single/"} className="btn btn-dark bottom-10">
-                       Checkout
+                      Checkout
                     </Link>
                   </div>
                 </div>

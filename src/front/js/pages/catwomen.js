@@ -75,10 +75,10 @@ export const CatWomen = () => {
             return (
               <div className="col-sm-6 col-md-4 col-lg-6 py-4 d-inline-flex" style={{width: "400px"}} key={i}>
                 <WomenProducts
-                  key={i}
                   title={item.title}
                   price={item.price}
                   image={item.image}
+                  id={item.id}
                 />
               </div>
             );

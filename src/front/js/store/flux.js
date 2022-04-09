@@ -20,8 +20,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 			isLogged: false,
 			catMen:[],
 			catWomen:[],
+			item: {},
+			cartItems: [],
+			cartQuantity: [],
 			infoProfile:{},
-			infoAddress:{},
+			infoAddress:{}
 		},
 		actions: {
 			// Use getActions to call a function within a fuction
@@ -87,17 +90,48 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 
 			getCatMen: () => {
-				fetch("https://fakestoreapi.com/products/category/men's%20clothing") //fetch para obtener la categoria men//
+				fetch(process.env.BACKEND_URL + '/api/product/men') //fetch para obtener la categoria men//
             	.then(res=>res.json())
             	.then(json=> setStore({ catMen: json }))
 			},
 
 			getCatWomen: () => {
-				fetch("https://fakestoreapi.com/products/category/women's%20clothing") //fetch para obtener la categoria women//
+				fetch(process.env.BACKEND_URL + '/api/product/women') //fetch para obtener la categoria women//
             	.then(res=>res.json())
             	.then(json=> setStore({ catWomen: json }))
 			},
 
+			getItem: (id) => {
+				fetch('https://fakestoreapi.com/products/'+id)
+            	.then(res=>res.json())
+            	.then(json=>setStore({item: json}))
+			},
+
+			onAdd:(product,quantity)=>{
+				let {id, title, price, image} = product
+				const exist = getStore().cartItems.find(item => item.id === product.id)
+				console.log(exist);
+				if(exist != undefined) {
+					// seteamos en el array "cartItems" la actualización de la cantida
+					//para eso mapeamos el array y si los id del item coinciden actualizamos la cantidad
+					//sino devolvemos el item normal (parseo por los datos estan en string hay que resolver eso)
+					setStore({cartItems: getStore().cartItems.map((item)=>item.id === exist.id ? {...exist, quantity: parseInt(item.quantity)+parseInt(quantity)} : item)})
+				}
+				else { //si no se ha encontrado un producto existete en "cartItems" se agrega
+					const newItem = {id, title, price, quantity, image}
+					setStore({cartItems: getStore().cartItems.concat(newItem)})
+			  		}
+			},
+
+			deleteCart:(id)=>{
+				const removedItem = getStore().cartItems.find(item => item.id === id)
+				console.log(removedItem);
+				setStore({cartItems: getStore().cartItems.filter(item => item.id !== id)})
+			  },
+
+			getQuantity:(number) => {
+				setStore({cartQuantity: getStore().cartQuantity.concat(number)})
+			},
 			getProfile: () =>{
 				let token = localStorage.getItem('token');
 				fetch(process.env.BACKEND_URL + '/api/user/profile',{
@@ -236,8 +270,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 					  })
 					
 				},
-
-			
 
 			changeColor: (index, color) => {
 				//get the store
