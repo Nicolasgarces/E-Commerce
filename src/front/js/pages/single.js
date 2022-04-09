@@ -36,7 +36,7 @@ export const Single = props => {
     // 		</span>
     // 	</Link>
     // </div>
-    <div className="row container">
+    <div className="row container-fluid">
       <div className="col-lg-8">
         <div
           className="ecommerce-gallery"

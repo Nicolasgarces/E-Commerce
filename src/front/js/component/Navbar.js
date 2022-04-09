@@ -192,6 +192,9 @@ export const Navbar = () => {
                 aria-label="Close"
               ></button>
             </div>
+
+            <div className="overflow-auto" >
+
             {/* Cart Item */}
             {store.cartItems.length > 0 ? (
               store.cartItems.map((item) => (
@@ -218,13 +221,6 @@ export const Navbar = () => {
                   <div className="col-lg-6 d-flex justify-content-end">
                     <p className="card-title text-muted">$ {sum} </p>
                   </div>
-
-                  {/* <div className="col-lg-6">
-              <p className="card-title text-muted">Shipping</p>
-            </div>
-            <div className="col-lg-6 d-flex justify-content-end">
-              <p className="card-title text-muted">$000.000</p>
-            </div> */}
                   <div className="col-lg-6">
                     <h6 className="card-title">Total</h6>
                   </div>
@@ -238,6 +234,7 @@ export const Navbar = () => {
                   </div>
                 </div>
               </div>
+            </div>
             </div>
           </div>
         </div>

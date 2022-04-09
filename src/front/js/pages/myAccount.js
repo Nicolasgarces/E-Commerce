@@ -31,7 +31,7 @@ export const MyAccount = () => {
               </li>
               <li>
                 <Link
-                  to={"/userorders/"}
+                  to={"/viewmyorders/"}
                   className="nav-link text-white"
                   href="#"
                 >
