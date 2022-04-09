@@ -294,10 +294,12 @@ const getState = ({ getStore, getActions, setStore }) => {
             if (response.status === 201) {
               setStore({ onCheckOut: true });
 			  setStore({cartItems: []})
+			  setStore({onCheckOut: false})
             } else if (response.status === 401) {
               Swal.fire({
                 icon: "error",
                 title: "Log in expired",
+				confirmButtonColor: '#212529',
               });
             }
             return response.json();
@@ -307,6 +309,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             Swal.fire({
               icon: "success",
               title: data.msg,
+			  confirmButtonColor: '#212529',
             });
           });
       },
