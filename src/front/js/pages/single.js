@@ -36,7 +36,7 @@ export const Single = props => {
     // 		</span>
     // 	</Link>
     // </div>
-    <div className="row container">
+    <div className="row container-fluid">
       <div className="col-lg-8">
         <div
           className="ecommerce-gallery"
@@ -113,11 +113,11 @@ export const Single = props => {
           </div>
         </div>
       </div>
-      <div className="text-center mt-3">
+      {/* <div className="text-center mt-3">
         <h4>
           You May Also Like
         </h4>
-      </div>
+      </div> */}
       {/* <div className="col-lg-12 mx-auto d-flex mb-3">
         <div className="col-4 mt-1">
           <img
@@ -142,12 +142,12 @@ export const Single = props => {
         </div>
       </div> */}
   {/* <!-- Carousel wrapper --> */}
-<div
+{/* <div
   id="carouselMultiItemExample"
   className="carousel slide carousel-dark text-center"
   data-mdb-ride="carousel"
 >
-  {/* <!-- Controls --> */}
+
   <div className="d-flex justify-content-center mb-4">
     <button
       className="carousel-control-prev position-relative"
@@ -168,7 +168,7 @@ export const Single = props => {
       <span className="visually-hidden">Next</span>
     </button>
   </div>
-  {/* <!-- Inner --> */}
+  
       {store.item.id < 5 ? (
         store.catMen.map((item)=> (
         <MenSugggestedItems key={item.id}
@@ -186,7 +186,7 @@ export const Single = props => {
         />
       ))
     }
-  </div>
+  </div> */}
 </div>
   );
 };

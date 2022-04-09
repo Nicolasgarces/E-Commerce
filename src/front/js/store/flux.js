@@ -3,68 +3,67 @@ import Swal from 'sweetalert2'
 console.log(process.env.BACKEND_URL);
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
-    store: {
-      message: null,
-      demo: [
-        {
-          title: "FIRST",
-          background: "white",
-          initial: "white",
-        },
-        {
-          title: "SECOND",
-          background: "white",
-          initial: "white",
-        },
-      ],
-      isLogged: false,
-      catMen: [],
-      catWomen: [],
-      item: {},
-      cartItems: [],
-      cartQuantity: [],
-      infoProfile: {},
-      infoAddress: {},
-      onCheckOut: false,
-    },
-    actions: {
-      // Use getActions to call a function within a fuction
-      exampleFunction: () => {
-        getActions().changeColor(0, "green");
-      },
-      login: (email, password) => {
-        const raw = {
-          email: email,
-          password: password,
-        };
-        fetch(process.env.BACKEND_URL + "/api/login", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(raw),
-        })
-          .then((response) => {
-            if (response.status === 401) {
-              alert("Bad user or password");
-            }
-            return response.json();
-          })
-          .then((data) => {
-            localStorage.setItem("token", data.access_token);
-            console.log(localStorage.getItem("token"));
-            setStore({ isLogged: true });
-          });
-      },
-      auth: () => {
-        let token = localStorage.getItem("token");
-        token === "" || token === null || token === "undefined"
-          ? setStore({ isLogged: false })
-          : setStore({ isLogged: true });
-      },
-      // obtenemos datos una vez autenticados
-      getProfile: () => {
-        let token = localStorage.getItem("token");
+		store: {
+			message: null,
+			demo: [
+				{
+					title: "FIRST",
+					background: "white",
+					initial: "white"
+				},
+				{
+					title: "SECOND",
+					background: "white",
+					initial: "white"
+				}
+			],
+			isLogged: false,
+			catMen:[],
+			catWomen:[],
+			item: {},
+			cartItems: [],
+			cartQuantity: [],
+			infoProfile:{},
+			infoAddress:{},
+			userOrders:[],
+      onCheckOut: false
+		},
+		actions: {
+			// Use getActions to call a function within a fuction
+			exampleFunction: () => {
+				getActions().changeColor(0, "green");
+			},
+			login: (email,password) => {
+				const raw = {
+					"email": email,
+					"password": password
+				}
+				fetch(process.env.BACKEND_URL + '/api/login',{
+						method: 'POST',
+						headers:{
+							'Content-Type':'application/json'
+						},
+						body: JSON.stringify(raw)
+					})
+					.then((response)=> {
+						if(response.status === 401){
+							alert('Bad user or password')
+						}
+						return response.json()})
+					.then(data => {
+						localStorage.setItem("token",data.access_token)
+						console.log(localStorage.getItem('token'));
+						setStore({isLogged:true})
+					})
+					
+			},
+			auth: ()=>{
+				let token = localStorage.getItem('token');
+				token === '' || token === null || token === 'undefined' ? setStore({isLogged:false}):setStore({isLogged:true})
+			},
+			// obtenemos datos una vez autenticados
+			getProfile: ()=>{
+				let token = localStorage.getItem('token');
 
         fetch(process.env.BACKEND_URL + "/api/user/profile", {
           method: "GET",
@@ -165,57 +164,84 @@ const getState = ({ getStore, getActions, setStore }) => {
           .then((json) => setStore({ infoProfile: json }));
       },
 
-      editProfile: (isNameToModify, infoProfile) => {
-        let name;
-        let lastName;
-        let msgResult;
-        Swal.fire({
-          title: "Type your new value",
-          input: "text",
-          inputAttributes: {
-            autocapitalize: "off",
-          },
-          showCancelButton: true,
-          confirmButtonText: "Save",
-          showLoaderOnConfirm: true,
-          preConfirm: (value) => {
-            let token = localStorage.getItem("token");
-            if (isNameToModify) {
-              name = value;
-              lastName = infoProfile.lastName;
-              infoProfile.name = value;
-            } else {
-              name = infoProfile.name;
-              lastName = value;
-              infoProfile.lastName = value;
-            }
-            const raw = {
-              name: name,
-              lastName: lastName,
-            };
-            return fetch(process.env.BACKEND_URL + "/api/user/update", {
-              method: "PUT",
-              headers: {
-                "Content-Type": "application/json",
-                Authorization: "Bearer " + token,
-              },
-              body: JSON.stringify(raw),
-            })
-              .then((response) => response.json())
-              .then((data) => {
-                msgResult = data;
-              });
-          },
-          allowOutsideClick: () => !Swal.isLoading(),
-        }).then((result) => {
-          if (result.isConfirmed) {
-            Swal.fire({
-              title: `${msgResult.msg}`,
-              imageUrl: result.value.avatar_url,
-            });
-          }
-        });
-      },
+			getQuantity:(number) => {
+				setStore({cartQuantity: getStore().cartQuantity.concat(number)})
+			},
+			getProfile: () =>{
+				let token = localStorage.getItem('token');
+				fetch(process.env.BACKEND_URL + '/api/user/profile',{
+					method: 'GET',
+					headers:{
+						'Content-Type':'application/json',
+						'Authorization': 'Bearer ' + token
+					},
+				})
+				.then((response)=> {
+					if(response.status === 401){
+						alert('Bad user or password')
+					}
+					return response.json()})
+				.then(json => setStore({infoProfile: json}))
+				
+			},
+		
+			editProfile: (isNameToModify, infoProfile) =>{
+				let name;
+				let lastName;
+				let msgResult;
+				console.log(infoProfile);
+				Swal.fire({
+					title: 'Type your new value',
+					input: 'text',
+					inputAttributes: {
+					  autocapitalize: 'off'
+					},
+					showCancelButton: true,
+					confirmButtonText: 'Save',
+					showLoaderOnConfirm: true,
+					confirmButtonColor: '#212529',
+					cancelButtonColor: '#b02a37',
+					preConfirm: (value) => {
+						let token = localStorage.getItem('token');
+						if(isNameToModify){
+							name = value
+							lastName = infoProfile.lastName
+							infoProfile.name = value
+						}else{
+							name = infoProfile.name
+							lastName = value
+							infoProfile.lastName = value
+						}
+						const raw = {
+							"name": name,
+							"lastName": lastName
+						}
+					  return fetch(process.env.BACKEND_URL + '/api/user/update',{
+						method: 'PUT',
+						headers:{
+							'Content-Type':'application/json',
+							'Authorization': 'Bearer ' + token,
+						},
+						body: JSON.stringify(raw)
+					})
+					.then((response)=> response.json())
+					.then(data => {
+						msgResult = data;
+						console.log(infoProfile);
+					})
+					},
+					allowOutsideClick: () => !Swal.isLoading()
+				  }).then((result) => {
+					if (result.isConfirmed) {
+					  Swal.fire({
+						title: `${msgResult.msg}`,
+						imageUrl: result.value.avatar_url,
+						confirmButtonText: '#212529'
+					  })
+					}
+				  })
+				
+			},
 
       getAddress: () => {
         let token = localStorage.getItem("token");
@@ -236,45 +262,64 @@ const getState = ({ getStore, getActions, setStore }) => {
         // .then(json => console.log(json))
       },
 
-      updateAddress: () => {
-        let msgResult;
-        Swal.fire({
-          title: "Type your new value",
-          input: "text",
-          inputAttributes: {
-            autocapitalize: "off",
-          },
-          showCancelButton: true,
-          confirmButtonText: "Save",
-          showLoaderOnConfirm: true,
-          preConfirm: (value) => {
-            let token = localStorage.getItem("token");
-            const raw = {
-              address: value,
-            };
-            return fetch(process.env.BACKEND_URL + "/api/user/updateAddress", {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-                Authorization: "Bearer " + token,
-              },
-              body: JSON.stringify(raw),
-            })
-              .then((response) => response.json())
-              .then((data) => {
-                msgResult = data;
-              });
-          },
-          allowOutsideClick: () => !Swal.isLoading(),
-        }).then((result) => {
-          if (result.isConfirmed) {
-            Swal.fire({
-              title: `${msgResult.msg}`,
-              imageUrl: result.value.avatar_url,
-            });
-          }
-        });
-      },
+				updateAddress: () =>{
+					let msgResult;
+					Swal.fire({
+						title: 'Type your new value',
+						input: 'text',
+						inputAttributes: {
+						  autocapitalize: 'off'
+						},
+						showCancelButton: true,
+						confirmButtonText: 'Save',
+						showLoaderOnConfirm: true,
+						confirmButtonColor: '#212529',
+						cancelButtonColor: '#b02a37',
+						preConfirm: (value) => {
+							let token = localStorage.getItem('token');
+							const raw = {
+								"address": value,
+							}
+						  return fetch(process.env.BACKEND_URL + '/api/user/updateAddress',{
+							method: 'POST',
+							headers:{
+								'Content-Type':'application/json',
+								'Authorization': 'Bearer ' + token,
+							},
+							body: JSON.stringify(raw)
+						})
+						.then((response)=> response.json())
+						.then(data => {
+							msgResult = data;
+						})
+						},
+						allowOutsideClick: () => !Swal.isLoading()
+					  }).then((result) => {
+						if (result.isConfirmed) {
+						  Swal.fire({
+							title: `${msgResult.msg}`,
+							imageUrl: result.value.avatar_url,
+							confirmButtonColor: '#212529'
+						  })
+						}
+					  })
+					
+				},
+				getUserOrders: () =>{
+					let token = localStorage.getItem('token');
+					fetch(process.env.BACKEND_URL + '/api/user/orders',{
+						method: 'GET',
+						headers:{
+							'Content-Type':'application/json',
+							'Authorization': 'Bearer ' + token
+						},
+					})
+					.then((response)=> {
+						return response.json()})
+						.then(json => setStore({userOrders: json}))
+					
+				},
+
 
       checkOut: (items, total) => {
         let token = localStorage.getItem("token");
