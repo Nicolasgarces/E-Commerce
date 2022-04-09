@@ -50,10 +50,19 @@ const getState = ({ getStore, getActions, setStore }) => {
 							alert('Bad user or password')
 						}
 						return response.json()})
-					.then(data => {
-						localStorage.setItem("token",data.access_token)
-						console.log(localStorage.getItem('token'));
-						setStore({isLogged:true})
+					.then(data => {						
+						if(data.msg === "User does not exist"){
+							Swal.fire({
+								icon: 'warning',
+								title: 'Email or Password Invalid',
+								confirmButtonColor: '#212529'
+								})
+						}else{
+							localStorage.setItem("token",data.access_token)
+							console.log(localStorage.getItem('token'));
+							setStore({isLogged:true})
+						}
+
 					})
 					
 			},
