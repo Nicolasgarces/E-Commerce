@@ -24,7 +24,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 			cartItems: [],
 			cartQuantity: [],
 			infoProfile:{},
-			infoAddress:{}
+			infoAddress:{},
+			userOrders:[]
 		},
 		actions: {
 			// Use getActions to call a function within a fuction
@@ -262,6 +263,21 @@ const getState = ({ getStore, getActions, setStore }) => {
 					  })
 					
 				},
+				getUserOrders: () =>{
+					let token = localStorage.getItem('token');
+					fetch(process.env.BACKEND_URL + '/api/user/orders',{
+						method: 'GET',
+						headers:{
+							'Content-Type':'application/json',
+							'Authorization': 'Bearer ' + token
+						},
+					})
+					.then((response)=> {
+						return response.json()})
+						.then(json => setStore({userOrders: json}))
+					
+				},
+
 
 			changeColor: (index, color) => {
 				//get the store

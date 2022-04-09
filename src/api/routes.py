@@ -187,7 +187,7 @@ def add_car():
     
     #print(body["cartItems"])
     for item in body["cartItems"]:
-        newCart= OrderCart(quantity= item["quantity"],TotalMount = body["TotalMount"],productID = item["id"],user_id = user.id)
+        newCart= OrderCart(quantity=item["quantity"], price=item["price"],title=item["title"],TotalMount=body["TotalMount"],productID=item["id"],user_id=user.id)
         db.session.add(newCart)
         db.session.commit()
         

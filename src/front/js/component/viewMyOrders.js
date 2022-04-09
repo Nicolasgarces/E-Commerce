@@ -8,6 +8,7 @@ export const ViewMyOrders = () => {
   useEffect(() => {
     actions.getProfile();
     actions.getAddress();
+    actions.getUserOrders();
   }, []);
 
 
@@ -33,31 +34,32 @@ export const ViewMyOrders = () => {
                     <table class="table table-striped">
                         <thead>
                             <tr>
-                                <th scope="col">Order #</th>
+                                <th scope="col">Product #</th>
+                                <th scope="col">Product Name</th>
                                 <th scope="col">Send To</th>
-                                <th scope="col">Total</th>
+                                <th scope="col">Price</th>
+                                <th scope="col">Quantity</th>
+                                <th scope="col" rowSpan={store.userOrders.length}>Total</th>
                                 {/* <th scope="col">Action</th> */}
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <th scope="row">1</th>
-                                <td>Luis Yosa</td>
-                                <td>$50.000</td>
-                                {/* <td><a href="#">View Order</a></td> */}
-                            </tr>
-                            <tr>
-                                <th scope="row">2</th>
-                                <td>Luis Yosa</td>
-                                <td>$1.500.000</td>
-                                {/* <td><a href="#">View Order</a></td> */}
-                            </tr>
-                            <tr>
-                                <th scope="row">3</th>
-                                <td>Luis Yosa</td>
-                                <td>$200.000</td>
-                                {/* <td><a href="#">View Order</a></td> */}
-                            </tr>
+                            
+                                {store.userOrders.map((item,i) => {
+                                    return(
+                                    <>
+                                    <tr>
+                                       
+                                        <th scope="row">{item.productID}</th>
+                                        <td>{item.title}</td>
+                                        <td>{store.infoProfile.name} {store.infoProfile.lastName}</td>
+                                        <td>{item.price}</td>
+                                        <td>{item.quantity}</td>
+                                        <td>{item.TotalMount}</td>
+                                    </tr>
+                                    </>
+                                    )
+                                })}
                         </tbody>
                     </table>
                 </div>

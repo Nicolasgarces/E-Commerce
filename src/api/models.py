@@ -24,6 +24,8 @@ class User(db.Model):
 class OrderCart(db.Model):
     orderCartID = db.Column(db.Integer, primary_key=True)
     quantity = db.Column(db.Integer, nullable=False)
+    price = db.Column(db.Integer, nullable=False)
+    title = db.Column(db.Text, nullable=False)
     TotalMount = db.Column(db.Integer,unique=False, nullable=True)
     productID = db.Column(db.Integer, db.ForeignKey('product.id'),
         nullable=False)
@@ -39,6 +41,8 @@ class OrderCart(db.Model):
         return {
             "orderCartID": self.orderCartID,
             "quantity": self.quantity,
+            "price": self.price,
+            "title": self.title,
             "productID": self.productID,
             "TotalMount": self.TotalMount,
             "user_id": self.user_id
