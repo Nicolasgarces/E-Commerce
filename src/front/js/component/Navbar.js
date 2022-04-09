@@ -213,7 +213,7 @@ export const Navbar = () => {
             {/* Cart Price */}
             <div className="offcanvas-body align-items-end">
               <div className="mb-3" style={{ maxWidth: "540px" }}>
-                <div className="row g-0">
+                <div className="row g-0 container">
                   <div className="col-lg-6">
                     <p className="card-title text-muted">Subtotal</p>
                   </div>

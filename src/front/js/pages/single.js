@@ -6,12 +6,12 @@ import Navbar from "../component/Navbar";
 import { MenSugggestedItems } from "../component/MenSugggestedItems";
 import { WomenSugggestedItems } from "../component/WomenSugggestedItems";
 
-export const Single = props => {
-	const params = useParams();
+export const Single = (props) => {
+  const params = useParams();
   const { store, actions } = useContext(Context);
   console.log(store.item);
   console.log(store.cartItems);
-  const [quantity, setQuantity] = useState("")
+  const [quantity, setQuantity] = useState("");
   // const handleAddtoCart = () =>{
   //   actions.onAdd(store.item)
   // }
@@ -22,11 +22,11 @@ export const Single = props => {
   // const onAdd = () => {
   //   setCartItems([...cartItems, {...store.item}])
   // }
- 
-	useEffect(()=>{
-		actions.getItem(params.theid)
-	},[])
-	return (
+
+  useEffect(() => {
+    actions.getItem(params.theid);
+  }, []);
+  return (
     // <div className="jumbotron">
     // 	<img src={store.item.image}></img>
 
@@ -107,7 +107,12 @@ export const Single = props => {
               ></input>
             </div>
             <div className="add-to-cart">
-              <button className="btn btn-dark" onClick={()=>actions.onAdd(store.item, quantity)}>Add to cart</button>
+              <button
+                className="btn btn-dark"
+                onClick={() => actions.onAdd(store.item, quantity)}
+              >
+                Add to cart
+              </button>
             </div>
             <span></span>
           </div>
@@ -192,5 +197,5 @@ export const Single = props => {
 };
 
 Single.propTypes = {
-	match: PropTypes.object
+  match: PropTypes.object,
 };
