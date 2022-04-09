@@ -8,7 +8,7 @@ export const CatWomen = () => {
   return (
     <div className="container-fluid">
       <div className="row flex-nowrap">
-        <div className="menuWomen col-auto col-md-3 col-xl-2 px-sm-2 px-0">
+        <div className="menuWomen col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2 px-sm-2 px-0">
           <div className="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
             <a
               className="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none"
@@ -69,7 +69,7 @@ export const CatWomen = () => {
           </div>
         </div>
 
-        <div className="col-lg-10 container mx-auto">
+        <div className="col-lg-10 container text-center">
           {/* <h1 className="text-center py-2">WOMEN CLOTHES</h1> */}
           {store.catWomen.map((item, i) => {
             return (
