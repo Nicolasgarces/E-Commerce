@@ -6,12 +6,12 @@ import Navbar from "../component/Navbar";
 import { MenSugggestedItems } from "../component/MenSugggestedItems";
 import { WomenSugggestedItems } from "../component/WomenSugggestedItems";
 
-export const Single = props => {
-	const params = useParams();
+export const Single = (props) => {
+  const params = useParams();
   const { store, actions } = useContext(Context);
   console.log(store.item);
   console.log(store.cartItems);
-  const [quantity, setQuantity] = useState("")
+  const [quantity, setQuantity] = useState("");
   // const handleAddtoCart = () =>{
   //   actions.onAdd(store.item)
   // }
@@ -22,11 +22,11 @@ export const Single = props => {
   // const onAdd = () => {
   //   setCartItems([...cartItems, {...store.item}])
   // }
- 
-	useEffect(()=>{
-		actions.getItem(params.theid)
-	},[])
-	return (
+
+  useEffect(() => {
+    actions.getItem(params.theid);
+  }, []);
+  return (
     // <div className="jumbotron">
     // 	<img src={store.item.image}></img>
 
@@ -107,16 +107,19 @@ export const Single = props => {
               ></input>
             </div>
             <div className="add-to-cart">
-              <button className="btn btn-dark" onClick={()=>actions.onAdd(store.item, quantity)}>Add to cart</button>
+              <button
+                className="btn btn-dark"
+                onClick={() => actions.onAdd(store.item, quantity)}
+              >
+                Add to cart
+              </button>
             </div>
             <span></span>
           </div>
         </div>
       </div>
       <div className="text-center mt-3">
-        <h4>
-          You May Also Like
-        </h4>
+        <h4>You May Also Like</h4>
       </div>
       {/* <div className="col-lg-12 mx-auto d-flex mb-3">
         <div className="col-4 mt-1">
@@ -141,56 +144,64 @@ export const Single = props => {
           />
         </div>
       </div> */}
-  {/* <!-- Carousel wrapper --> */}
-<div
-  id="carouselMultiItemExample"
-  className="carousel slide carousel-dark text-center"
-  data-mdb-ride="carousel"
->
-  {/* <!-- Controls --> */}
-  <div className="d-flex justify-content-center mb-4">
-    <button
-      className="carousel-control-prev position-relative"
-      type="button"
-      data-mdb-target="#carouselMultiItemExample"
-      data-mdb-slide="prev"
-    >
-      <span className="carousel-control-prev-icon" aria-hidden="true"></span>
-      <span className="visually-hidden">Previous</span>
-    </button>
-    <button
-      className="carousel-control-next position-relative"
-      type="button"
-      data-mdb-target="#carouselMultiItemExample"
-      data-mdb-slide="next"
-    >
-      <span className="carousel-control-next-icon" aria-hidden="true"></span>
-      <span className="visually-hidden">Next</span>
-    </button>
-  </div>
-  {/* <!-- Inner --> */}
-      {store.item.id < 5 ? (
-        store.catMen.map((item)=> (
-        <MenSugggestedItems key={item.id}
-        title={item.title}
-        price={item.price}
-        image={item.image}
-        id={item.id}
-        />))
-      ):store.catWomen.map((item)=> (
-        <WomenSugggestedItems key={item.id}
-        title={item.title}
-        price={item.price}
-        image={item.image}
-        id={item.id}
-        />
-      ))
-    }
-  </div>
-</div>
+      {/* <!-- Carousel wrapper --> */}
+      <div
+        id="carouselMultiItemExample"
+        className="carousel slide carousel-dark text-center"
+        data-mdb-ride="carousel"
+      >
+        {/* <!-- Controls --> */}
+        <div className="d-flex justify-content-center mb-4">
+          <button
+            className="carousel-control-prev position-relative"
+            type="button"
+            data-mdb-target="#carouselMultiItemExample"
+            data-mdb-slide="prev"
+          >
+            <span
+              className="carousel-control-prev-icon"
+              aria-hidden="true"
+            ></span>
+            <span className="visually-hidden">Previous</span>
+          </button>
+          <button
+            className="carousel-control-next position-relative"
+            type="button"
+            data-mdb-target="#carouselMultiItemExample"
+            data-mdb-slide="next"
+          >
+            <span
+              className="carousel-control-next-icon"
+              aria-hidden="true"
+            ></span>
+            <span className="visually-hidden">Next</span>
+          </button>
+        </div>
+        {/* <!-- Inner --> */}
+        {store.item.id < 5
+          ? store.catMen.map((item) => (
+              <MenSugggestedItems
+                key={item.id}
+                title={item.title}
+                price={item.price}
+                image={item.image}
+                id={item.id}
+              />
+            ))
+          : store.catWomen.map((item) => (
+              <WomenSugggestedItems
+                key={item.id}
+                title={item.title}
+                price={item.price}
+                image={item.image}
+                id={item.id}
+              />
+            ))}
+      </div>
+    </div>
   );
 };
 
 Single.propTypes = {
-	match: PropTypes.object
+  match: PropTypes.object,
 };
