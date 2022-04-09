@@ -118,9 +118,11 @@ export const Single = (props) => {
           </div>
         </div>
       </div>
-      <div className="text-center mt-3">
-        <h4>You May Also Like</h4>
-      </div>
+      {/* <div className="text-center mt-3">
+        <h4>
+          You May Also Like
+        </h4>
+      </div> */}
       {/* <div className="col-lg-12 mx-auto d-flex mb-3">
         <div className="col-4 mt-1">
           <img
@@ -144,61 +146,53 @@ export const Single = (props) => {
           />
         </div>
       </div> */}
-      {/* <!-- Carousel wrapper --> */}
-      <div
-        id="carouselMultiItemExample"
-        className="carousel slide carousel-dark text-center"
-        data-mdb-ride="carousel"
-      >
-        {/* <!-- Controls --> */}
-        <div className="d-flex justify-content-center mb-4">
-          <button
-            className="carousel-control-prev position-relative"
-            type="button"
-            data-mdb-target="#carouselMultiItemExample"
-            data-mdb-slide="prev"
-          >
-            <span
-              className="carousel-control-prev-icon"
-              aria-hidden="true"
-            ></span>
-            <span className="visually-hidden">Previous</span>
-          </button>
-          <button
-            className="carousel-control-next position-relative"
-            type="button"
-            data-mdb-target="#carouselMultiItemExample"
-            data-mdb-slide="next"
-          >
-            <span
-              className="carousel-control-next-icon"
-              aria-hidden="true"
-            ></span>
-            <span className="visually-hidden">Next</span>
-          </button>
-        </div>
-        {/* <!-- Inner --> */}
-        {store.item.id < 5
-          ? store.catMen.map((item) => (
-              <MenSugggestedItems
-                key={item.id}
-                title={item.title}
-                price={item.price}
-                image={item.image}
-                id={item.id}
-              />
-            ))
-          : store.catWomen.map((item) => (
-              <WomenSugggestedItems
-                key={item.id}
-                title={item.title}
-                price={item.price}
-                image={item.image}
-                id={item.id}
-              />
-            ))}
-      </div>
-    </div>
+  {/* <!-- Carousel wrapper --> */}
+{/* <div
+  id="carouselMultiItemExample"
+  className="carousel slide carousel-dark text-center"
+  data-mdb-ride="carousel"
+>
+
+  <div className="d-flex justify-content-center mb-4">
+    <button
+      className="carousel-control-prev position-relative"
+      type="button"
+      data-mdb-target="#carouselMultiItemExample"
+      data-mdb-slide="prev"
+    >
+      <span className="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span className="visually-hidden">Previous</span>
+    </button>
+    <button
+      className="carousel-control-next position-relative"
+      type="button"
+      data-mdb-target="#carouselMultiItemExample"
+      data-mdb-slide="next"
+    >
+      <span className="carousel-control-next-icon" aria-hidden="true"></span>
+      <span className="visually-hidden">Next</span>
+    </button>
+  </div>
+  
+      {store.item.id < 5 ? (
+        store.catMen.map((item)=> (
+        <MenSugggestedItems key={item.id}
+        title={item.title}
+        price={item.price}
+        image={item.image}
+        id={item.id}
+        />))
+      ):store.catWomen.map((item)=> (
+        <WomenSugggestedItems key={item.id}
+        title={item.title}
+        price={item.price}
+        image={item.image}
+        id={item.id}
+        />
+      ))
+    }
+  </div> */}
+</div>
   );
 };
 

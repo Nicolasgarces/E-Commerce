@@ -27,7 +27,6 @@ export const Navbar = () => {
         sum += total;
     })
   console.log(sum);
-
   const handleSubmit = (e) => {
     e.preventDefault();
     actions.login(email, password);
@@ -228,9 +227,10 @@ export const Navbar = () => {
                     <h6 className="card-title">$ {sum} </h6>
                   </div>
                   <div className="col-lg-12  text-center">
-                    <Link to={"/single/"} className="btn btn-dark bottom-10">
+                    <button className="btn btn-dark bottom-10" onClick={()=>actions.checkOut(store.cartItems, sum)}>
                       Checkout
-                    </Link>
+                    </button>
+                    {store.onCheckOut ? <Redirect to="/viewmyorders"/>:null}
                   </div>
                 </div>
               </div>
