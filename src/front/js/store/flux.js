@@ -155,6 +155,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				let name;
 				let lastName;
 				let msgResult;
+				console.log(infoProfile);
 				Swal.fire({
 					title: 'Type your new value',
 					input: 'text',
@@ -164,6 +165,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 					showCancelButton: true,
 					confirmButtonText: 'Save',
 					showLoaderOnConfirm: true,
+					confirmButtonColor: '#212529',
+					cancelButtonColor: '#b02a37',
 					preConfirm: (value) => {
 						let token = localStorage.getItem('token');
 						if(isNameToModify){
@@ -190,6 +193,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					.then((response)=> response.json())
 					.then(data => {
 						msgResult = data;
+						console.log(infoProfile);
 					})
 					},
 					allowOutsideClick: () => !Swal.isLoading()
@@ -197,7 +201,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 					if (result.isConfirmed) {
 					  Swal.fire({
 						title: `${msgResult.msg}`,
-						imageUrl: result.value.avatar_url
+						imageUrl: result.value.avatar_url,
+						confirmButtonText: '#212529'
 					  })
 					}
 				  })
@@ -234,6 +239,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 						showCancelButton: true,
 						confirmButtonText: 'Save',
 						showLoaderOnConfirm: true,
+						confirmButtonColor: '#212529',
+						cancelButtonColor: '#b02a37',
 						preConfirm: (value) => {
 							let token = localStorage.getItem('token');
 							const raw = {
@@ -257,7 +264,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 						if (result.isConfirmed) {
 						  Swal.fire({
 							title: `${msgResult.msg}`,
-							imageUrl: result.value.avatar_url
+							imageUrl: result.value.avatar_url,
+							confirmButtonColor: '#212529'
 						  })
 						}
 					  })

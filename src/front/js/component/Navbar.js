@@ -39,26 +39,26 @@ export const Navbar = () => {
   return (
     <nav className="navbar-dark bg-dark">
       <div className="d-flex flex-row container">
-        <div className="col-lg-2 ">
+        <div className="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">
           <Link to={`/`} className="navbar-brand text-white">
             <img
               alt="svgImg"
               src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHg9IjBweCIgeT0iMHB4Igp3aWR0aD0iNDgiIGhlaWdodD0iNDgiCnZpZXdCb3g9IjAgMCA0OCA0OCIKc3R5bGU9IiBmaWxsOiMwMDAwMDA7Ij48cGF0aCBmaWxsPSIjNjRiNWY2IiBkPSJNMzcsMzZIMTdjLTIuNzYxLDAtNS0yLjIzOS01LTVWMTFjMC0yLjc2MSwyLjIzOS01LDUtNWgyMGMyLjc2MSwwLDUsMi4yMzksNSw1djIwIEM0MiwzMy43NjEsMzkuNzYxLDM2LDM3LDM2eiBNMjEsMzBoMTRWMTguNWMwLTMuMDM4LTIuNDYyLTUuNS01LjUtNS41SDE4djE0QzE4LDI4LjY1NywxOS4zNDMsMzAsMjEsMzB6Ij48L3BhdGg+PHBhdGggZmlsbD0iI2ZiOGMwMCIgZD0iTTMxLDQySDExYy0yLjc2MSwwLTUtMi4yMzktNS01VjE3YzAtMi43NjEsMi4yMzktNSw1LTVoMjBjMi43NjEsMCw1LDIuMjM5LDUsNXYyMCBDMzYsMzkuNzYxLDMzLjc2MSw0MiwzMSw0MnogTTE3LjUsMzZIMzBWMjFjMC0xLjY1Ny0xLjM0My0zLTMtM0gxNWMtMS42NTcsMC0zLDEuMzQzLTMsM3Y5LjVDMTIsMzMuNTM4LDE0LjQ2MiwzNiwxNy41LDM2eiI+PC9wYXRoPjxwYXRoIGZpbGw9IiM2NGI1ZjYiIGQ9Ik0zNiwyNnYxYzAsMS42NTctMS4zNDMsMy0zLDNIMjN2NmgxNGMyLjc1LDAsNS0yLjI1LDUtNXYtNUgzNnoiPjwvcGF0aD48L3N2Zz4="
             />
-            FIERAS
+            <span className="navigationButtons">FIERAS</span>
           </Link>
         </div>
 
-        <div className=" col-lg-6" id="navbarNav">
+        <div className=" col-xl-6 col-lg-6 col-md-6 col-sm-6 col-8 " id="navbarNav">
           <ul className="d-flex flex-row justify-content-center">
             <li className="nav-item">
               <NavLink
                 to={`/`}
                 activeClassName="fw-bold text-decoration-underline"
-                className="nav-link text-white"
+                className="navigationButtons nav-link text-white"
                 exact={true}
               >
-                Home <span className="sr-only">(current)</span>
+                Home <span className=" sr-only">(current)</span>
               </NavLink>
             </li>
 
@@ -66,7 +66,7 @@ export const Navbar = () => {
               <NavLink
                 to={`/catmen/`}
                 activeClassName="nav-link text-white"
-                className="nav-link text-white"
+                className="navigationButtons nav-link text-white"
               >
                 Men
               </NavLink>
@@ -76,41 +76,36 @@ export const Navbar = () => {
               <NavLink
                 to={`/catwomen/`}
                 activeClassName="nav-link text-white"
-                className="nav-link text-white"
+                className="navigationButtons nav-link text-white"
               >
                 Women
               </NavLink>
             </li>
-            {store.isLogged ? (
-              <li className="nav-item">
-                <NavLink
-                  to={`/myaccount/`}
-                  activeClassName="nav-link text-white"
-                  className="nav-link text-white"
-                >
-                  My account
-                </NavLink>
-              </li>
-            ) : null}
+            {store.isLogged ?  <li className="nav-item">
+              <NavLink
+                to={`/myaccount/`}
+                activeClassName="nav-link text-white"
+                className="navigationButtons nav-link text-white"
+              >
+                <p>My account</p>
+              </NavLink>
+            </li> : null }
           </ul>
         </div>
 
-        <div className="col-lg-3 d-flex flex-column align-items-end justify-content-center ">
-          {store.isLogged ? (
-            <span className="text-white">
-              {" "}
-              Logout{" "}
-              <i
-                className="bi bi-box-arrow-right loginIcon text-white h4"
-                onClick={() => actions.logout()}
-              ></i>
-            </span>
-          ) : (
-            <form
-              className="d-flex topIcons dropdown "
-              onSubmit={handleSubmit}
-              noValidate
-            >
+        <div className="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-1 d-flex flex-column align-items-end justify-content-center ">
+         {store.isLogged ? <span className="text-white"><i className="bi bi-box-arrow-right loginIcon text-white h4" onClick={()=>actions.logout()}></i></span> : 
+         <form
+            className="d-flex topIcons dropdown "
+            onSubmit={handleSubmit}
+            noValidate
+          >
+            <a
+              type="button"
+              id="dropdownLoginUsuario"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            ></a>
               <a
                 type="button"
                 id="dropdownLoginUsuario"
@@ -163,10 +158,10 @@ export const Navbar = () => {
                 </div>
               </div>
             </form>
-          )}
+          }
         </div>
 
-        <div className="col-lg-1 d-flex flex-column align-items-end justify-content-center">
+        <div className="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-1 d-flex flex-column align-items-end justify-content-center">
           <button
             className="btn btn-light"
             type="button"
@@ -197,6 +192,9 @@ export const Navbar = () => {
                 aria-label="Close"
               ></button>
             </div>
+
+            <div className="overflow-auto" >
+
             {/* Cart Item */}
             {store.cartItems.length > 0 ? (
               store.cartItems.map((item) => (
@@ -223,13 +221,6 @@ export const Navbar = () => {
                   <div className="col-lg-6 d-flex justify-content-end">
                     <p className="card-title text-muted">$ {sum} </p>
                   </div>
-
-                  {/* <div className="col-lg-6">
-              <p className="card-title text-muted">Shipping</p>
-            </div>
-            <div className="col-lg-6 d-flex justify-content-end">
-              <p className="card-title text-muted">$000.000</p>
-            </div> */}
                   <div className="col-lg-6">
                     <h6 className="card-title">Total</h6>
                   </div>
@@ -243,6 +234,7 @@ export const Navbar = () => {
                   </div>
                 </div>
               </div>
+            </div>
             </div>
           </div>
         </div>
