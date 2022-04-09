@@ -200,7 +200,7 @@ def add_car():
         "msg": "Order added successfuly "
     }
     
-    return jsonify(response_body), 200
+    return jsonify(response_body), 201
 
 @api.route("/user/orders", methods=["GET"])
 @jwt_required()
