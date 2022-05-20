@@ -22,7 +22,7 @@ const Jumbotron = () => {
             type="button"
             className="buttonMen btn btn-dark position-absolute top-50 start-50 translate-middle"
             to={`/catmen/`}>
-            SHOP MENS
+            SHOP MEN
           </Link>
         </div>
 
@@ -40,7 +40,7 @@ const Jumbotron = () => {
             type="button"
             className="buttonWomen btn btn-dark position-absolute top-50 start-50 translate-middle"
             to={`/catwomen/`}>
-            SHOP WOMENS
+            SHOP WOMEN
           </Link>
         </div>
       </div>
